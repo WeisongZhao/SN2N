@@ -31,7 +31,7 @@ This repository is for our developed self-inspired Noise2Noise (SN2N) learning-t
 
 <div align="center">
 
-✨ [**Introduction**](#-Introduction) **|**  🔧 [**Install**](#-Installation)  **|** 🎨 [**Data generation**](#-Data_generation) **|**  💻 [**Training**](#-Training) **|** ⚡ [**Inference**](#-Inference)**|** &#x1F308; [**Results**](#-Results)
+✨ [**Introduction**](#-Introduction) **|**  🔧 [**Install**](#-Installation)  **|** 🎨 [**Data generation**](#-Data_generation) **|**  💻 [**Training**](#-Training) **|** ⚡ [**Inference**](#-Inference) **|** &#x1F308; **|** &#x1F308; [**Related links**](#-Related_links)
 
 </div>
 
@@ -226,7 +226,7 @@ In 3D prediction tasks, we use the method of stitching predictions to avoid issu
 
 - v0.1.0 initial version of SN2N
 
-## Related links: 
+## Related_links: 
 
 - **Some fancy results and comparisons:** [my website](https://weisongzhao.github.io/MyWeb2/portfolio-4-col.html)
 - **Preprint:** [Liying Qu et al. Self-inspired learning to denoise for live-cell super-resolution microscopy, bioRxiv (2024).]()
