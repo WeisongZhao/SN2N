@@ -20,7 +20,7 @@
 
 
 <p>
-<img src='./imgs/4color-small.gif' align="left" width=180>
+<img src='./imgs/4color-small.gif' align="left" width=190>
 </p>
 <br>
 
@@ -31,7 +31,7 @@ This repository is for our developed self-inspired Noise2Noise (SN2N) learning-t
 
 <div align="center">
 
-✨ [**Introduction**](#-Introduction) **|**  🔧 [**Install**](#-Install)  **|** 🎨 [**Data generation**](#-Data generation) **|**  💻 [**Training**](#-Training) **|** ⚡ [**Inference**](#-Inference)**|** &#x1F308; [**Results**](#-Results)
+✨ [**Introduction**](#-Introduction) **|**  🔧 [**Install**](#-Install)  **|** 🎨 [**Data generation**](#-Data_generation) **|**  💻 [**Training**](#-Training) **|** ⚡ [**Inference**](#-Inference)**|** &#x1F308; [**Results**](#-Results)
 
 </div>
 
