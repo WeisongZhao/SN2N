@@ -80,11 +80,11 @@ Our SN2N is adaptable to both 2D (**xy**) and 3D (**xyz**) datasets. You can use
 
 #### 2D data generation
 ```bash
-	# Data generation
+	#data generation
     python scripts_sn2n_datagenerate_2D.py --train_data_path "noisy" --name "simu_2D" --save_path "simu_2D_0213"
     
-    #Key parameters:
- 	--img_path
+    #key parameters:
+    --img_path
         path of raw images TO train
     --save_path
         path of patched dataset TO save
@@ -130,10 +130,10 @@ Our SN2N is adaptable to both 2D (**xy**) and 3D (**xyz**) datasets. You can use
 
 #### 3D data generation
 ```bash
-	# Data generation
+    #data generation
     python scripts_sN2N_datagenerate_3D.py --train_data_path "noisy" --name "simu_3D" --save_path "simu_3D_0213"
     
-    #Key parameters 3D: 	
+    #key parameters 3D: 	
     --multi_frame
         Number of Frames Used to Generate Three-Dimensional Training Data
 ```
@@ -149,16 +149,16 @@ You can use SN2N data pairs for SN2N learning
 #### 2D data training
 
 ```bash
-    # training
+    #training
     python Scripts_SN2N_train2D.py --cuda_device 0 --dataset_name "noisy_2D" --epoch 20 --reg 1 --prefix 0123_
 
-    # Key parameters:  
+    #key parameters:  
     --dataset_name
     	Name of the dataset, used for training
     --epochs
     	Total number of training epochs
     --train_batch_size
-    	how many patches will be extracted for training
+    	how many patches will be extracted for each iteration
     --test_batch_size
     	how many patches will be extracted for testing
     --reg
@@ -168,7 +168,7 @@ You can use SN2N data pairs for SN2N learning
      	Weight of sparse loss
         {default: 0}
 	--prefix
-		Prefix to add at the beginning When saving the model
+		Prefix to add at the beginning when saving the model
 	--ifadaptive_lr
 		Whether to use adaptive learning rate.
         {default: False}
@@ -177,7 +177,7 @@ You can use SN2N data pairs for SN2N learning
 #### 3D data training
 
 ```bash
-    # training
+    #training
     python Scripts_SN2N_train3D.py --cuda_device 0 --dataset_name "noisy_3D" --epoch 20 --reg 1 --prefix 0123_
 ```
 
@@ -191,10 +191,10 @@ Before inference, you should have trained your own model
 #### 2D inference
 
   ```bash
-    # testing
+    #test
     python Scripts_SN2N_test_2D.py --cuda_device 0 --img_path "path_to_images" --save_path "path_to_save_predictions" --model_path "path_to_model" --epoch 40 --ifGPU True
 
-    # Key parameters:
+    #key parameters:
     --cuda_device
     	CUDA device ID
     --imag_path
@@ -213,10 +213,10 @@ Before inference, you should have trained your own model
 In 3D prediction tasks, we use the method of stitching predictions to avoid issues of memory overflow
 
   ```bash
-    # tesing
+    #test
     python Scripts_SN2N_test_3D.py --cuda_device 0 --img_path "path_to_images" --save_path "path_to_save_predictions" --model_path "path_to_model" --epoch 40 --ifGPU True --overlap_shape "2,256,256"
 
-    # Key parameters:
+    #key parameters:
     --overlap_shape
     	In the stitching prediction, the 'overlap' used
 		default{2, 256,256}
