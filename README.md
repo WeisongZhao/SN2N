@@ -42,7 +42,7 @@ This repository is for our developed self-inspired Noise2Noise (SN2N) learning-t
 Our SN2N is fully competitive with the supervised learning methods and overcomes the need for large dataset and clean ground-truth. **First**, we create a self-supervised data generation strategy based on super-resolution images' spatial redundancy, using a diagonal resampling step followed by a Fourier interpolation for single-frame Noise2Noise. **Second**, we have taken a step further by ushering in a self-constrained learning process to enhance the performance and data-efficiency. **Finally**, we develop random patch transformations in multiple dimensions (Patch2Patch) to further improve the data efficiency.Patch2Patch can equivalently create more imaging results without changing the inherent noise properties and hence it can effectively reduce the required data bulk. Detailed workflow of SN2N can be seen as follows:
 
 <p align="center">
-  <img src="SN2N-workflow.png" width='600'>
+  <img src="./imgs/SN2N-workflow.png" width='600'>
 </p> 
 
 
