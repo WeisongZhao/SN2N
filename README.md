@@ -31,7 +31,7 @@ This repository is for our developed self-inspired Noise2Noise (SN2N) learning-t
 
 <div align="center">
 
-✨ [**Introduction**](#-Introduction) **|**  🔧 [**Install**](#-Install)  **|** 🎨 [**Data generation**](#-Data%20generation) **|**  💻 [**Training**](#-Training) **|** ⚡ [**Inference**](#-Inference)**|** &#x1F308; [**Results**](#-Results)
+✨ [**Introduction**](#-Introduction) **|**  🔧 [**Install**](#-Installation)  **|** 🎨 [**Data generation**](#-Data_generation) **|**  💻 [**Training**](#-Training) **|** ⚡ [**Inference**](#-Inference)**|** &#x1F308; [**Results**](#-Results)
 
 </div>
 
@@ -43,13 +43,10 @@ This repository is for our developed self-inspired Noise2Noise (SN2N) learning-t
 <img src='./imgs/SN2N-workflow.png' align="right" width=500>
 </p>
 
-Our SN2N is fully competitive with the supervised learning methods and overcomes the need for large dataset and clean ground-truth. **First**, we create a self-supervised data generation strategy based on super-resolution images' spatial redundancy, using a diagonal resampling step followed by a Fourier interpolation for single-frame Noise2Noise. **Second**, we have taken a step further by ushering in a self-constrained learning process to enhance the performance and data-efficiency. **Finally**, we provide a Patch2Patch data augmentation (random patch transformations in multiple dimensions) to further improve the data efficiency. Detailed workflow of SN2N:
+Our SN2N is fully competitive with the supervised learning methods and overcomes the need for large dataset and clean ground-truth. **First**, we create a self-supervised data generation strategy based on super-resolution images' spatial redundancy, using a diagonal resampling step followed by a Fourier interpolation for single-frame Noise2Noise. **Second**, we have taken a step further by ushering in a self-constrained learning process to enhance the performance and data-efficiency. **Finally**, we provide a Patch2Patch data augmentation (random patch transformations in multiple dimensions) to further improve the data efficiency.
 
 
-
-
-
-## 🔧 Install
+## 🔧 Installation
 
 ### Tested platform
   - Python = 3.7.6, Pytorch = 1.12.0 (`Win 10`, `128 GB RAM`, `NVIDIA RTX 4090 24 GB`, `CUDA 11.6`)
