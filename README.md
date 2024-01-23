@@ -80,7 +80,7 @@ Our SN2N is adaptable to both 2D (**xy**) and 3D (**xyz**) datasets. You can use
 
 #### 2D data generation
 ```bash
-	#data generation
+    #data generation
     python scripts_sn2n_datagenerate_2D.py --train_data_path "noisy" --name "simu_2D" --save_path "simu_2D_0213"
     
     #key parameters:
