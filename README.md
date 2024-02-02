@@ -13,8 +13,9 @@
 <p>
 <h1 align="center"><font color="#FF6600">S</font>N2N</h1>
 <h5 align="center">Self-inspired learning to denoise for live-cell super-resolution microscopy.</h5>
-<h6 align="right">v0.1.0</h6>
+<h6 align="right">v0.2.8</h6>
 </p>
+
 <br>
 
 
@@ -30,7 +31,7 @@ This repository is for our developed self-inspired Noise2Noise (SN2N) learning-t
 
 <div align="center">
 
-✨ [**Introduction**](#-Introduction) **|**  🔧 [**Install**](#-Installation)  **|** 🎨 [**Data-generation**](#-Data_generation) **|**  💻 [**Training**](#-Training) **|** ⚡ [**Inference**](#-Inference) **|** &#x1F308; [**Related-links**](#-Related_links)
+✨ [**Introduction**](#-Introduction) **|**  🔧 [**Install**](#-Installation)  **|** 🎨 [**Data generation**](#-Data generation) **|**  💻 [**Training**](#-Training) **|** ⚡ [**Inference**](#-Inference) **|** &#x1F308; [**Related links**](#-Related links)
 
 </div>
 
