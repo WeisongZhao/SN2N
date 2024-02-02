@@ -31,7 +31,7 @@ This repository is for our developed self-inspired Noise2Noise (SN2N) learning-t
 
 <div align="center">
 
-✨ [**Introduction**](#-Introduction) **|**  🔧 [**Install**](#-Installation)  **|** 🎨 [**Data generation**](#-Data generation) **|**  💻 [**Training**](#-Training) **|** ⚡ [**Inference**](#-Inference) **|** &#x1F308; [**Related links**](#-Related links)
+✨ [**Introduction**](#-Introduction) **|**  🔧 [**Install**](#-Installation)  **|** 🎨 [**Data_generation**](#-Data_generation) **|**  💻 [**Training**](#-Training) **|** ⚡ [**Inference**](#-Inference) **|** &#x1F308; [**Related_links**](#-Related_links)
 
 </div>
 
