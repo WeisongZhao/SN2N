@@ -1,8 +1,9 @@
 [![Github commit](https://img.shields.io/github/last-commit/WeisongZhao/SN2N)](https://github.com/WeisongZhao/SN2N/)
-[![Github All Releases](https://img.shields.io/github/downloads/WeisongZhao/SN2N/total.svg)](https://github.com/WeisongZhao/SN2N/releases/tag/v0.1.0/)
+<!-- [![Github All Releases](https://img.shields.io/github/downloads/WeisongZhao/SN2N/total.svg)](https://github.com/WeisongZhao/SN2N/releases/tag/v0.2.8/) -->
 [![License](https://img.shields.io/github/license/WeisongZhao/SN2N)](https://github.com/WeisongZhao/SN2N/blob/master/LICENSE/)
 [![paper](https://img.shields.io/badge/paper-nat.%20methods-black.svg)](https://www.nature.com/nmeth/)
-[![releases](https://img.shields.io/badge/release-v0.1.0-FF6600.svg)](https://github.com/WeisongZhao/SN2N/releases/tag/v0.1.0/)<br>
+<!-- [![releases](https://img.shields.io/badge/release-v0.1.0-FF6600.svg)](https://github.com/WeisongZhao/SN2N/releases/tag/v0.2.8/) -->
+<br>
 
 [![Twitter](https://img.shields.io/twitter/follow/QuLiying?label=liying)](https://twitter.com/weisong_zhao)
 [![Twitter](https://img.shields.io/twitter/follow/weisong_zhao?label=weisong)](https://twitter.com/QuLiying)
@@ -25,13 +26,13 @@
 <br>
 
 
-This repository is for our developed self-inspired Noise2Noise (SN2N) learning-to-denoise engine, and it will be in continued development. It is distributed as accompanying software for publication: [Liying Qu et al. Self-inspired learning to denoise for live-cell super-resolution microscopy, XXX (2024)](https://www.nature.com/nmeth/). Please cite SN2N in your publications, if it helps your research.
+This repository is for our developed self-inspired Noise2Noise (SN2N) learning-to-denoise engine, and it will be in continued development. It is distributed as accompanying software for publication: [Liying Qu et al. Self-inspired learning to denoise for live-cell super-resolution microscopy, bioRxiv (2024)](https://doi.org/10.1101/2024.01.23.576521). Please cite SN2N in your publications, if it helps your research.
 
 <br><br><br>
 
 <div align="center">
 
-✨ [**Introduction**](#-Introduction) **|**  🔧 [**Install**](#-Installation)  **|** 🎨 [**Data_generation**](#-Data_generation) **|**  💻 [**Training**](#-Training) **|** ⚡ [**Inference**](#-Inference) **|** &#x1F308; [**Related_links**](#-Related_links)
+✨ [**Introduction**](#-Introduction) **|**  🔧 [**Installation**](#-Installation)  **|** 🎨 [**Dataset**](#-Dataset) **|**  💻 [**Training**](#-Training) **|** ⚡ [**Inference**](#-Inference) **|** &#x1F308; [**Resources**](#-Resources)
 
 </div>
 
@@ -75,7 +76,7 @@ Our SN2N is fully competitive with the supervised learning methods and overcomes
     $ pip install requirement.txt
     ```
 
-## 🎨Data generation
+## 🎨Dataset
 
 ### 1. Self-supervised data generation
 Our SN2N is adaptable to both 2D (**xy**) and 3D (**xyz**) datasets. You can use your own data or our uploaded to generate 2D / 3D SN2N data pairs. 
@@ -145,7 +146,7 @@ Users can run the script after customizing parameters in Script_SN2N_trainer_2D.
 #### 3D data training
 
 ```bash
-	python Script_SN2N_trainer_2D.py --img_path "Users own path/data" --sn2n_loss "1" --bs "32" --lr "2e-4" --epochs "100" 
+    python Script_SN2N_trainer_2D.py --img_path "Users own path/data" --sn2n_loss "1" --bs "32" --lr "2e-4" --epochs "100" 
 ```
 
 #### Parameters instructions
@@ -213,12 +214,13 @@ The key parameters for 2D inference and 3D inference are consistent. There are a
 
 ## Version
 
-- v0.2.8  version of SN2N
+- v0.2.8 reorder the core code
+- v0.1.0 initial version
 
-## Related_links: 
+## Resources: 
 
 - **Some fancy results and comparisons:** [Lab's website](https://weisongzhao.github.io/MyWeb2/portfolio-4-col.html)
-- **Preprint:** [Liying Qu et al. Self-inspired learning to denoise for live-cell super-resolution microscopy, bioRxiv (2024).]()
+- **Preprint:** [Liying Qu et al. Self-inspired learning to denoise for live-cell super-resolution microscopy, bioRxiv (2024).](https://doi.org/10.1101/2024.01.23.576521)
 
 
 ## Open source [SN2N](https://github.com/WeisongZhao/SN2N)
