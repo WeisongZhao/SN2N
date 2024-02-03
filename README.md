@@ -76,7 +76,7 @@ Our SN2N is fully competitive with the supervised learning methods and overcomes
     $ pip install requirement.txt
     ```
 
-## 🎨Dataset
+## 🎨 Dataset
 
 ### 1. Self-supervised data generation
 Our SN2N is adaptable to both 2D (**xy**) and 3D (**xyz**) datasets. You can use your own data or our uploaded to generate 2D / 3D SN2N data pairs. 
@@ -217,7 +217,7 @@ The key parameters for 2D inference and 3D inference are consistent. There are a
 - v0.2.8 reorder the core code
 - v0.1.0 initial version
 
-## Resources: 
+## &#x1F308; Resources: 
 
 - **Some fancy results and comparisons:** [Lab's website](https://weisongzhao.github.io/MyWeb2/portfolio-4-col.html)
 - **Preprint:** [Liying Qu et al. Self-inspired learning to denoise for live-cell super-resolution microscopy, bioRxiv (2024).](https://doi.org/10.1101/2024.01.23.576521)
