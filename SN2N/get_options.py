@@ -67,10 +67,10 @@ def datagen2D(arguments=None):
                         choices=['Fourier', 'bilinear'], 
                         help='Scaling method. "Fourier" for Fourier rescaling, "bilinear" for spatial rescaling.')
     
-    if arguments is None:
-        arguments = sys.argv[1:]
-    
-    return parser.parse_args(arguments)
+    args, _ = parser.parse_known_args(arguments)  # 使用 parse_known_args() 以接受不在定义中的参数
+
+    return args
+
 
 def datagen3D(arguments=None):
     parser = argparse.ArgumentParser(description="SN2N Data Generator Configuration")
@@ -136,10 +136,9 @@ def datagen3D(arguments=None):
                         choices=['Fourier', 'bilinear'], 
                         help='Scaling method. "Fourier" for Fourier rescaling, "bilinear" for spatial rescaling.')
     
-    if arguments is None:
-        arguments = sys.argv[1:]
-    
-    return parser.parse_args(arguments)
+    args, _ = parser.parse_known_args(arguments)  # 使用 parse_known_args() 以接受不在定义中的参数
+
+    return args
 
 def trainer2D(arguments=None):
     parser = argparse.ArgumentParser(description="SelfN2N Neural Network Configuration")
@@ -170,14 +169,14 @@ def trainer2D(arguments=None):
                         type=str, 
                         default='128', 
                         help='Patch size for training, specified as "width,height".')
-    parser.add_argument('--ifadaptive_lr', 
-                        action='store_true', 
+    parser.add_argument('--if_alr',
+                        type=bool,
+                        default=True,
                         help='Flag to use adaptive learning rate. If set, adaptive learning rate will be used; otherwise, it will not.')
 
-    if arguments is None:
-        arguments = sys.argv[1:]
-    
-    return parser.parse_args(arguments)
+    args, _ = parser.parse_known_args(arguments)  # 使用 parse_known_args() 以接受不在定义中的参数
+
+    return args
 
 
 def trainer3D(arguments=None):
@@ -209,14 +208,14 @@ def trainer3D(arguments=None):
                         type=str, 
                         default='16,128,128', 
                         help='Patch size for training, specified as "width,height".')
-    parser.add_argument('--ifadaptive_lr', 
-                        action='store_true', 
+    parser.add_argument('--if_alr', 
+                        type=bool,
+                        default=True,
                         help='Flag to use adaptive learning rate. If set, adaptive learning rate will be used; otherwise, it will not.')
 
-    if arguments is None:
-        arguments = sys.argv[1:]
-    
-    return parser.parse_args(arguments)
+    args, _ = parser.parse_known_args(arguments)  # 使用 parse_known_args() 以接受不在定义中的参数
+
+    return args
 
 
 def Predict2D(arguments=None):
@@ -228,10 +227,9 @@ def Predict2D(arguments=None):
                         help='Path to the raw images for training.')
     
 
-    if arguments is None:
-        arguments = sys.argv[1:]
-    
-    return parser.parse_args(arguments)
+    args, _ = parser.parse_known_args(arguments)  # 使用 parse_known_args() 以接受不在定义中的参数
+
+    return args
 
 def Predict3D(arguments=None):
     parser = argparse.ArgumentParser(description="Image Prediction Script")
@@ -247,10 +245,9 @@ def Predict3D(arguments=None):
                         default = '2,256,256', 
                         help='Overlap shape in 3D stitching prediction.')
     
-    if arguments is None:
-        arguments = sys.argv[1:]
-    
-    return parser.parse_args(arguments)
+    args, _ = parser.parse_known_args(arguments)  # 使用 parse_known_args() 以接受不在定义中的参数
+
+    return args
 
 
 
@@ -337,10 +334,9 @@ def demo2D(arguments=None):
                        help='Flag to use adaptive learning rate. If set, adaptive learning rate will be used; otherwise, it will not.')
 
     
-    if arguments is None:
-        arguments = sys.argv[1:]
-    
-    return parser.parse_args(arguments)
+    args, _ = parser.parse_known_args(arguments)  # 使用 parse_known_args() 以接受不在定义中的参数
+
+    return args
 
 
 def demo3D(arguments=None):
@@ -429,8 +425,7 @@ def demo3D(arguments=None):
                         default = '2,256,256', 
                         help='Overlap shape in 3D stitching prediction.')
 
-    if arguments is None:
-        arguments = sys.argv[1:]
-    
-    return parser.parse_args(arguments)
+    args, _ = parser.parse_known_args(arguments)  # 使用 parse_known_args() 以接受不在定义中的参数
+
+    return args
 

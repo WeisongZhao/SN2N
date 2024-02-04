@@ -24,7 +24,7 @@ class generator2D():
             0: NONE; 
             1: Direct interchange in t;
             2: Interchange in single frame;
-            3: Interchange in multiple frame but in different regions;
+            3: Interchange between different experiments;
             {default: 0}
         P2Pup:
             Increase the dataset to its (1 + P2Pup) times size.
@@ -74,8 +74,8 @@ class generator2D():
             os.makedirs(self.dataset_path)
         self.P2Pmode = P2Pmode
         self.P2Pup = P2Pup
-        self.P2P_times = np.sqrt(P2Pup)
-        self.P2P_rolls = np.sqrt(P2Pup)
+        self.P2P_times = int(np.sqrt(int(P2Pup)))
+        self.P2P_rolls = int(np.sqrt(int(P2Pup)))
         self.BAmode = BAmode    
         self.SWsize = SWsize
         self.SWmode = SWmode
@@ -135,7 +135,7 @@ class generator2D():
 
             except ValueError:
                 if self.P2Pmode == 3:
-                    image_data_b = self.imread_stack(datapath_list[random.randint(0, l - 1)])
+                    image_data_b = tifffile.imread(datapath_list[random.randint(0, l - 1)])
                 else:
                     image_data_b = []
                 image_arr = self.slidingWindow2d(image_data)
@@ -474,7 +474,7 @@ class generator2D():
         -------
         imga: image after ROI interchange
         """
-        size = self.P2P_ROI_size
+        size = self.P2Ppatch
         h = size[0]
         w = size[1]
         if h < np.min((np.size(imga, 0), np.size(imgb, 0))) and w < np.min((np.size(imga, 1), np.size(imgb, 1))):

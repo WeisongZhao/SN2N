@@ -49,7 +49,7 @@ def normalize_percentage(x, pmin=3, pmax=99.8, axis=None, clip=False, eps=1e-20,
     mi = np.percentile(x,pmin,axis=axis,keepdims=True) #np.percantile对象可以是多维数组
     ma = np.percentile(x,pmax,axis=axis,keepdims=True) 
     
-    print(np.double(mi), ma)
+    # print(np.double(mi), ma)
     return normalize_mi_ma(x, mi, ma, clip=clip, eps=eps, dtype=dtype) 
 
 
