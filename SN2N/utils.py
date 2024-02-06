@@ -44,7 +44,7 @@ def normalize_mi_ma(x, mi, ma, clip=False, eps=1e-20, dtype=np.float32):
         x = np.clip(x,0,1) 
         return x 
 
-def normalize_percentage(x, pmin=3, pmax=99.8, axis=None, clip=False, eps=1e-20, dtype=np.float32): 
+def normalize_percentage(x, pmin, pmax, axis=None, clip=False, eps=1e-20, dtype=np.float32): 
     """Percentile-based image normalization.""" 
     mi = np.percentile(x,pmin,axis=axis,keepdims=True) 
     ma = np.percentile(x,pmax,axis=axis,keepdims=True) 
