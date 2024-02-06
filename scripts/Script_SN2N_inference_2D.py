@@ -1,11 +1,7 @@
 # -*- coding: utf-8 -*-
 
-import os
-import sys
-current_script_path = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.join(current_script_path, '..', 'SN2N'))
-from inference import Predictor2D
-from get_options import Predict2D
+from SN2N.inference import Predictor2D
+from SN2N.get_options import Predict2D
     
 
 if __name__ == '__main__':

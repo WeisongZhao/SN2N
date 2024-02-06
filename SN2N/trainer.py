@@ -7,8 +7,8 @@ import tifffile
 import numpy as np
 from glob import glob
 from skimage.io import imread, imsave
-from models import Unet_2d, Unet_3d
-from utils import normalize
+from SN2N.models import Unet_2d, Unet_3d
+from SN2N.utils import normalize
 
 class net2D():
     def __init__(self, img_path,  sn2n_loss = 1, bs = 32, lr = 2e-4, epochs = 100, 

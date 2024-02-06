@@ -6,7 +6,7 @@ import tifffile
 import numpy as np
 import itertools
 import tqdm
-from utils import normalize, normalize_tanh, TOTENSOR_
+from SN2N.utils import normalize, normalize_tanh, TOTENSOR_
 
 class Predictor2D(): 
     def __init__(self, img_path):
@@ -40,6 +40,7 @@ class Predictor2D():
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         for (mroot, mdirs, mfiles) in os.walk(model_path):
             for jj, model_Ufile in enumerate(mfiles):
+                print('=====Model: %d====='%(jj + 1))
                 m_path = os.path.join(mroot, model_Ufile)
                 model = torch.load(m_path, map_location=device)
                 model = model.to(device)
@@ -130,6 +131,7 @@ class Predictor3D():
         modelpath_list = []
         for (mroot, mdirs, mfiles) in os.walk(model_path):
             for jj, model_Ufile in enumerate(mfiles):
+                print('=====Model: %d====='%(jj + 1))
                 m_path = os.path.join(mroot, model_Ufile)
                 model = torch.load(m_path, map_location=device)
                 model = model.to(device)

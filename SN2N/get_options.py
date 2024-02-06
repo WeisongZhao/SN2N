@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import argparse
-import sys
 
 def datagen2D(arguments=None):
     parser = argparse.ArgumentParser(description="SN2N Data Generator Configuration")
@@ -49,7 +48,7 @@ def datagen2D(arguments=None):
                         default=1, 
                         help="""Threshold for excluding patches with black areas.
                         The actual threshold value is determined according to the description provided for `SWmode`.""")
-    parser.add_argument('--P2P_patch', 
+    parser.add_argument('--P2Ppatch', 
                         type=str, 
                         default='64', 
                         help='ROI size for interchange, specified as "width,height".')
@@ -67,7 +66,11 @@ def datagen2D(arguments=None):
                         choices=['Fourier', 'bilinear'], 
                         help='Scaling method. "Fourier" for Fourier rescaling, "bilinear" for spatial rescaling.')
     
-    args, _ = parser.parse_known_args(arguments)  # 使用 parse_known_args() 以接受不在定义中的参数
+    # args, _ = parser.parse_known_args(arguments) 
+    
+    print("Arguments:", arguments)  # 打印命令行传递的参数
+    args, _ = parser.parse_known_args(arguments) 
+    print("Parsed arguments:", args)  # 打印解析后的参数
 
     return args
 
@@ -118,7 +121,7 @@ def datagen3D(arguments=None):
                         default=1, 
                         help="""Threshold for excluding patches with black areas.
                         The actual threshold value is determined according to the description provided for `SWmode`.""")
-    parser.add_argument('--P2P_patch', 
+    parser.add_argument('--P2Ppatch', 
                         type=str, 
                         default='64', 
                         help='ROI size for interchange, specified as "width,height".')
@@ -136,7 +139,7 @@ def datagen3D(arguments=None):
                         choices=['Fourier', 'bilinear'], 
                         help='Scaling method. "Fourier" for Fourier rescaling, "bilinear" for spatial rescaling.')
     
-    args, _ = parser.parse_known_args(arguments)  # 使用 parse_known_args() 以接受不在定义中的参数
+    args, _ = parser.parse_known_args(arguments) 
 
     return args
 
@@ -174,7 +177,7 @@ def trainer2D(arguments=None):
                         default=True,
                         help='Flag to use adaptive learning rate. If set, adaptive learning rate will be used; otherwise, it will not.')
 
-    args, _ = parser.parse_known_args(arguments)  # 使用 parse_known_args() 以接受不在定义中的参数
+    args, _ = parser.parse_known_args(arguments) 
 
     return args
 
@@ -213,7 +216,7 @@ def trainer3D(arguments=None):
                         default=True,
                         help='Flag to use adaptive learning rate. If set, adaptive learning rate will be used; otherwise, it will not.')
 
-    args, _ = parser.parse_known_args(arguments)  # 使用 parse_known_args() 以接受不在定义中的参数
+    args, _ = parser.parse_known_args(arguments) 
 
     return args
 
@@ -227,7 +230,7 @@ def Predict2D(arguments=None):
                         help='Path to the raw images for training.')
     
 
-    args, _ = parser.parse_known_args(arguments)  # 使用 parse_known_args() 以接受不在定义中的参数
+    args, _ = parser.parse_known_args(arguments) 
 
     return args
 
@@ -251,14 +254,14 @@ def Predict3D(arguments=None):
 
 
 
-def demo2D(arguments=None):
+def execute2D(arguments=None):
     parser = argparse.ArgumentParser(description="SelfN2N Data Generator Configuration")
     ##============Important=====================
     parser.add_argument('--img_path', 
                         type=str, 
                         required=True, 
                         help='Path to the raw images for training.')
-    parser.add_argument('--P2P_aug_mode', 
+    parser.add_argument('--P2Pmode', 
                         type=int, 
                         default=0, 
                         choices=[0, 1, 2, 3], 
@@ -267,11 +270,11 @@ def demo2D(arguments=None):
                         1: Direct interchange in time; 
                         2: Interchange in a single frame; 
                         3: Interchange in multiple frames but in different regions.""")
-    parser.add_argument('--P2P_aug_multiple', 
+    parser.add_argument('--P2Pup', 
                         type=int, 
                         default=1, 
-                        help='For the Patch2Patch augmentation, the actual augmentation multiple is calculated as 1 + P2P_aug_multiple.')
-    parser.add_argument('--Basic_aug_mode', 
+                        help='Increase the dataset to its (1 + P2Pup) times size.')
+    parser.add_argument('--BAmode', 
                         type=int, 
                         default=0, 
                         choices=[0, 1, 2], 
@@ -279,7 +282,7 @@ def demo2D(arguments=None):
                         0: None; 
                         1: Double the dataset with random rotate and flip; 
                         2: Eightfold the dataset with random rotate and flip.""")
-    parser.add_argument('--sliding_interval', 
+    parser.add_argument('--SWsize', 
                         type=int, 
                         default=64, 
                         help='Interval in pixels of the sliding window for generating image patches.')
@@ -301,52 +304,54 @@ def demo2D(arguments=None):
                         help='Total number of training epochs.')
     
     ##===========No need to change=============
-    parser.add_argument('--sliding_mode', 
+    parser.add_argument('--SWmode', 
                         type=int, 
                         default=1, 
                         choices=[0, 1], 
                         help="""Threshold mode to exclude some black patches. 
                         0: Set the actual threshold directly; 
-                        1: Set the actual threshold to the average value of the image plus the sliding window threshold.""")
-    parser.add_argument('--sliding_threshold', 
+                        1: The actual threshold is set to the sum of the image's average value and the `SWfilter`.""")
+    parser.add_argument('--SWfilter', 
                         type=int, 
                         default=1, 
-                        help='Threshold to exclude some black patches, in the range 0 to 255.')
-    parser.add_argument('--P2P_ROI_size', 
+                        help="""Threshold for excluding patches with black areas.
+                        The actual threshold value is determined according to the description provided for `SWmode`.""")
+    parser.add_argument('--P2Ppatch', 
                         type=str, 
-                        default='64,64', 
+                        default='64', 
                         help='ROI size for interchange, specified as "width,height".')
     parser.add_argument('--img_patch', 
                         type=str, 
-                        default='128,128', 
+                        default='128', 
                         help='Image patch size, specified as "width,height".')
     parser.add_argument('--ifx2', 
                         type=bool,
                         default=True, 
                         help='Flag to indicate rescaling to the original size. If set, rescales; otherwise, does not rescale.')
-    parser.add_argument('--inter_method', 
+    parser.add_argument('--inter_mode', 
                         type=str, 
                         default='Fourier', 
                         choices=['Fourier', 'bilinear'], 
                         help='Scaling method. "Fourier" for Fourier rescaling, "bilinear" for spatial rescaling.')
-    parser.add_argument('--ifadaptive_lr', 
-                       action='store_true', 
-                       help='Flag to use adaptive learning rate. If set, adaptive learning rate will be used; otherwise, it will not.')
+    parser.add_argument('--if_alr',
+                        type=bool,
+                        default=True,
+                        help='Flag to use adaptive learning rate. If set, adaptive learning rate will be used; otherwise, it will not.')
 
     
-    args, _ = parser.parse_known_args(arguments)  # 使用 parse_known_args() 以接受不在定义中的参数
+    args, _ = parser.parse_known_args(arguments)  
 
     return args
 
 
-def demo3D(arguments=None):
+def execute3D(arguments=None):
     parser = argparse.ArgumentParser(description="SelfN2N Data Generator Configuration")
     ##============Important=====================
     parser.add_argument('--img_path', 
                         type=str, 
                         required=True, 
                         help='Path to the raw images for training.')
-    parser.add_argument('--P2P_aug_mode', 
+    parser.add_argument('--P2Pmode', 
                         type=int, 
                         default=0, 
                         choices=[0, 1, 2, 3], 
@@ -355,11 +360,11 @@ def demo3D(arguments=None):
                         1: Direct interchange in time; 
                         2: Interchange in a single frame; 
                         3: Interchange in multiple frames but in different regions.""")
-    parser.add_argument('--P2P_aug_multiple', 
+    parser.add_argument('--P2Pup', 
                         type=int, 
                         default=1, 
-                        help='For the Patch2Patch augmentation, the actual augmentation multiple is calculated as 1 + P2P_aug_multiple.')
-    parser.add_argument('--Basic_aug_mode', 
+                        help='Increase the dataset to its (1 + P2Pup) times size.')
+    parser.add_argument('--BAmode', 
                         type=int, 
                         default=0, 
                         choices=[0, 1, 2], 
@@ -367,7 +372,7 @@ def demo3D(arguments=None):
                         0: None; 
                         1: Double the dataset with random rotate and flip; 
                         2: Eightfold the dataset with random rotate and flip.""")
-    parser.add_argument('--sliding_interval', 
+    parser.add_argument('--SWsize', 
                         type=int, 
                         default=64, 
                         help='Interval in pixels of the sliding window for generating image patches.')
@@ -377,7 +382,7 @@ def demo3D(arguments=None):
                         help='Weight of the self-constrained loss.')
     parser.add_argument('--bs', 
                         type=int, 
-                        default=4, 
+                        default=32, 
                         help='Training batch size.')
     parser.add_argument('--lr', 
                         type=float, 
@@ -389,20 +394,21 @@ def demo3D(arguments=None):
                         help='Total number of training epochs.')
     
     ##===========No need to change=============
-    parser.add_argument('--sliding_mode', 
+    parser.add_argument('--SWmode', 
                         type=int, 
                         default=1, 
                         choices=[0, 1], 
                         help="""Threshold mode to exclude some black patches. 
                         0: Set the actual threshold directly; 
-                        1: Set the actual threshold to the average value of the image plus the sliding window threshold.""")
-    parser.add_argument('--sliding_threshold', 
+                        1: The actual threshold is set to the sum of the image's average value and the `SWfilter`.""")
+    parser.add_argument('--SWfilter', 
                         type=int, 
                         default=1, 
-                        help='Threshold to exclude some black patches, in the range 0 to 255.')
-    parser.add_argument('--P2P_ROI_size', 
+                        help="""Threshold for excluding patches with black areas.
+                        The actual threshold value is determined according to the description provided for `SWmode`.""")
+    parser.add_argument('--P2Ppatch', 
                         type=str, 
-                        default='64,64', 
+                        default='64', 
                         help='ROI size for interchange, specified as "width,height".')
     parser.add_argument('--vol_patch', 
                         type=str, 
@@ -412,20 +418,21 @@ def demo3D(arguments=None):
                         type=bool,
                         default=True, 
                         help='Flag to indicate rescaling to the original size. If set, rescales; otherwise, does not rescale.')
-    parser.add_argument('--inter_method', 
+    parser.add_argument('--inter_mode', 
                         type=str, 
                         default='Fourier', 
                         choices=['Fourier', 'bilinear'], 
                         help='Scaling method. "Fourier" for Fourier rescaling, "bilinear" for spatial rescaling.')
-    parser.add_argument('--ifadaptive_lr', 
-                       action='store_true', 
-                       help='Flag to use adaptive learning rate. If set, adaptive learning rate will be used; otherwise, it will not.')
+    parser.add_argument('--if_alr', 
+                        type=bool,
+                        default=True,
+                        help='Flag to use adaptive learning rate. If set, adaptive learning rate will be used; otherwise, it will not.')
     parser.add_argument('--overlap_shape', 
                         type=str, 
                         default = '2,256,256', 
                         help='Overlap shape in 3D stitching prediction.')
-
-    args, _ = parser.parse_known_args(arguments)  # 使用 parse_known_args() 以接受不在定义中的参数
+    
+    args, _ = parser.parse_known_args(arguments)  
 
     return args
 

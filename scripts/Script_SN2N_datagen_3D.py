@@ -1,11 +1,7 @@
 # -*- coding: utf-8 -*-
 
-import os
-import sys
-current_script_path = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.join(current_script_path, '..', 'SN2N'))
-from datagen import generator3D
-from get_options import datagen3D
+from SN2N.datagen import generator3D
+from SN2N.get_options import datagen3D
     
 
 if __name__ == '__main__':
@@ -38,11 +34,12 @@ if __name__ == '__main__':
     ======Other parameters do not require modification; for details, refer to SN2N.get_options.========
     """
     
-    img_path = 'C:/Users/qqq/Desktop/SN2N-V0.28/examples/xyzt/data'
+    img_path = 'C:/Users/qqq/Desktop/SN2N-V0.29/examples/denoising3D/data/raw_data_per'
     P2Pmode = '1'
     P2Pup = '1'
     BAmode = '1'
     SWsize = '64' 
+    SWfilter = '8'
     
     
     datagen3D_args = [
@@ -50,12 +47,13 @@ if __name__ == '__main__':
         '--P2Pmode', P2Pmode,
         '--P2Pup', P2Pup,
         '--BAmode', BAmode,
-        '--SWsize', SWsize        
+        '--SWsize', SWsize,   
+        '--SWfilter', SWfilter
     ]
     
     args = datagen3D(datagen3D_args)
     
     ##Step 2: Execute data generation.
-    d = generator3D(img_path=args.img_path)
+    d = generator3D(img_path=args.img_path, P2Pmode = args.P2Pmode, P2Pup = args.P2Pup, BAmode = args.BAmode, SWsize = args.SWsize, SWfilter = args.SWfilter)
     d.execute()
 

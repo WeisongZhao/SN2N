@@ -5,7 +5,7 @@ import numpy as np
 import tifffile
 from skimage.io import imsave
 import random
-from utils import normalize
+from SN2N.utils import normalize
 np.seterr(divide='ignore',invalid='ignore')
 
 
@@ -24,7 +24,7 @@ class generator2D():
             0: NONE; 
             1: Direct interchange in t;
             2: Interchange in single frame;
-            3: Interchange between different experiments;
+            3: Interchange in multiple frame but in different regions;
             {default: 0}
         P2Pup:
             Increase the dataset to its (1 + P2Pup) times size.
@@ -74,8 +74,11 @@ class generator2D():
             os.makedirs(self.dataset_path)
         self.P2Pmode = P2Pmode
         self.P2Pup = P2Pup
-        self.P2P_times = int(np.sqrt(int(P2Pup)))
-        self.P2P_rolls = int(np.sqrt(int(P2Pup)))
+        self.P2P_times = int(np.sqrt(P2Pup))
+        self.P2P_rolls = int(np.sqrt(P2Pup))
+        if self.P2Pup > 0:
+            self.P2P_rolls = max(1, self.P2P_rolls)
+            self.P2P_times = max(1, self.P2P_times)
         self.BAmode = BAmode    
         self.SWsize = SWsize
         self.SWmode = SWmode
@@ -98,8 +101,8 @@ class generator2D():
         -------
         NULL
         """
-        times = self.P2P_times
-        roll = self.P2P_rolls
+        times = int(self.P2P_times)
+        roll = int(self.P2P_rolls)
         print('The path for the raw images used for training is located under:\n%s' %(self.img_path))
         print('The training dataset is being saved under:\n%s' %(self.dataset_path))
         if self.P2Pmode == 0:
@@ -449,7 +452,7 @@ class generator2D():
         if imgb == []:
             mode = 2    
         if mode == 1: #interchange along t-axial 
-            img = self.interchange_multiple(imga, imgb, ifdirect = False)
+            img = self.interchange_multiple(imga, imgb, ifdirect = True)
         elif mode == 2: #interchange in single image
             img = self.interchange_single(imga)
         elif mode == 3: #interchange in different images
@@ -488,6 +491,8 @@ class generator2D():
                 imga[xa: xa + h, ya : ya + w] = imgb[xb : xb + h, yb : yb + w]
 
         return imga
+    
+    
 
     def interchange_single(self, img):
         """
@@ -584,8 +589,11 @@ class generator3D():
             os.makedirs(self.dataset_path)
         self.P2Pmode = P2Pmode
         self.P2Pup = P2Pup
-        self.P2P_times = np.sqrt(P2Pup)
-        self.P2P_rolls = np.sqrt(P2Pup)
+        self.P2P_times = int(np.sqrt(P2Pup))
+        self.P2P_rolls = int(np.sqrt(P2Pup))
+        if self.P2Pup > 0:
+            self.P2P_rolls = max(1, self.P2P_rolls)
+            self.P2P_times = max(1, self.P2P_times)
         self.BAmode = BAmode 
         self.SWsize = SWsize
         self.SWmode = SWmode
@@ -607,8 +615,8 @@ class generator3D():
         """
         print('The path for the raw images used for training is located under:\n%s' %(self.img_path))
         print('The training dataset is being saved under:\n%s' %(self.dataset_path))
-        times = self.P2P_times
-        roll = self.P2P_rolls
+        times = int(self.P2P_times)
+        roll = int(self.P2P_rolls)
         multi_frame = self.vol_patch[0]
         if self.P2Pmode == 0:
             times = 0
@@ -620,6 +628,7 @@ class generator3D():
                 datapath_list.append(path)
         l= len(datapath_list)
         for ll in range(l):
+            print('For number %d frame'%(ll + 1))
             image_data_stack = tifffile.imread(datapath_list[ll])
             
             image_data_stack_list = []
@@ -628,13 +637,35 @@ class generator3D():
                 image_data = image_data_stack[tt : tt + multi_frame, :, :]
                 image_data_stack_list.append(image_data)
             image_data_stack_list = np.array(image_data_stack_list)
-            [tt, xx, yy] = image_data_stack.shape
             
-            
-            for ttt in range(tt-16):
+            for ttt in range(t-16):
                 img_temp = np.squeeze(image_data_stack_list[ttt, :, :, :])
                 image_arr = self.slidingWindow3d(img_temp)
                 flage = self.savedata3d(image_arr, flage)
+            
+            
+            if self.P2Pmode == 1 or self.P2Pmode == 3:
+                image_data_b = tifffile.imread(datapath_list[random.randint(0, l - 1)])
+            elif self.P2Pmode ==2:
+                image_data_b = []
+                
+            for circlelarge in range(roll):
+                if times >= 1:
+                    image_data_pre = self.random_interchange(imga = image_data,
+                        imgb = image_data_b) 
+                    for circle in range(times - 1):
+                        image_data_pre = self.random_interchange(imga = image_data_pre,
+                            imgb = image_data_b)
+                    image_data_stack_list_pre = []
+                    for tt in range(t-multi_frame):
+                        image_data_pre = image_data_pre[tt : tt + multi_frame, :, :]
+                        image_data_stack_list_pre.append(image_data)
+                    image_data_stack_list_pre = np.array(image_data_stack_list)
+                    
+                    for ttt in range(t-16):
+                        img_temp = np.squeeze(image_data_stack_list_pre[ttt, :, :, :])
+                        image_arr = self.slidingWindow3d(img_temp)
+                        flage = self.savedata3d(image_arr, flage)
             
         return 
     
@@ -653,8 +684,9 @@ class generator3D():
         if image_stack.ndim == 2:        
             image_stack = np.expand_dims(image_stack, 0)
         if image_stack.ndim == 1: 
-            imsize = self.img_patch
-            imsize = (int(imsize[0] / 2), int(imsize[1] / 2))
+            h = (self.vol_patch[1])
+            w = (self.vol_patch[2])
+            imsize = (int(h / 2), int(w / 2))
             left = np.zeros((1, imsize[0], imsize[1]))
             right = np.zeros((1, imsize[0], imsize[1]))
             return left, right
@@ -969,15 +1001,15 @@ class generator3D():
         if imgb == []:
             mode = 2    
         if mode == 1: #interchange along t-axial 
-            img = self.interchange_multiple(imga, imgb, size = size, ifdirect = False)
+            img = self.interchange_multiple3d(imga, imgb, ifdirect = True)
         elif mode == 2: #interchange in single image
-            img = self.interchange_single(imga, size = size)
+            img = self.interchange_single3d(imga)
         elif mode == 3: #interchange in different images
-            img = self.interchange_multiple(imga, imgb, size = size, ifdirect = False)
+            img = self.interchange_multiple3d(imga, imgb, ifdirect = False)
 
         return img
 
-    def interchange_multiple(self, imga, imgb, ifdirect = False):
+    def interchange_multiple3d(self, imga, imgb, ifdirect = False):
         """
         SN2N tool: Core of random interchange in multiple images
         ------
@@ -997,19 +1029,21 @@ class generator3D():
         size = self.P2Ppatch
         h = size[0]
         w = size[1]
-        if h < np.min((np.size(imga, 0), np.size(imgb, 0))) and w < np.min((np.size(imga, 1), np.size(imgb, 1))):
-            xa = random.randint(0, np.size(imga, 0) - h)
-            ya = random.randint(0, np.size(imga, 1) - w)
+        if h < np.min((np.size(imga, 1), np.size(imgb, 1))) and w < np.min((np.size(imga, 2), np.size(imgb, 2))):
+            xa = random.randint(0, np.size(imga, 1) - h)
+            ya = random.randint(0, np.size(imga, 2) - w)
             if ifdirect:
-                imga[xa: xa + h, ya : ya + w] = imgb[xa: xa + h, ya : ya + w] 
+                xb = xa
+                yb = ya
+                imga[:, xa: xa + h, ya : ya + w] = imgb[:, xa: xa + h, ya : ya + w] 
             else:
-                xb = random.randint(0, np.size(imgb, 0) - h)
-                yb = random.randint(0, np.size(imgb, 1) - w)
-                imga[xa: xa + h, ya : ya + w] = imgb[xb : xb + h, yb : yb + w]
+                xb = random.randint(0, np.size(imgb, 1) - h)
+                yb = random.randint(0, np.size(imgb, 2) - w)
+                imga[:, xa: xa + h, ya : ya + w] = imgb[:, xb : xb + h, yb : yb + w]
 
         return imga
 
-    def interchange_single(self, img):
+    def interchange_single3d(self, img):
         """
         SN2N tool: Core of random interchange in single image
         ------
@@ -1024,13 +1058,13 @@ class generator3D():
         h = size[0]
         w = size[1]
 
-        if h < np.size(img, 0) and w < np.size(img, 1):
-            x1 = random.randint(0, np.size(img, 0) - h)
-            y1 = random.randint(0, np.size(img, 1) - w)
-            x2 = random.randint(0, np.size(img, 0) - h)
-            y2 = random.randint(0, np.size(img, 1) - w)
-            img[x1: x1 + h, y1 : y1 + w], img[x2 : x2 + h, y2 : y2 + w] = \
-            img[x2 : x2 + h, y2 : y2 + w], img[x1: x1 + h, y1 : y1 + w]
+        if h < np.size(img, 1) and w < np.size(img, 2):
+            x1 = random.randint(0, np.size(img, 1) - h)
+            y1 = random.randint(0, np.size(img, 2) - w)
+            x2 = random.randint(0, np.size(img, 1) - h)
+            y2 = random.randint(0, np.size(img, 2) - w)
+            img[:, x1: x1 + h, y1 : y1 + w], img[:, x2 : x2 + h, y2 : y2 + w] = \
+            img[:, x2 : x2 + h, y2 : y2 + w], img[:, x1: x1 + h, y1 : y1 + w]
         return img
 
 
