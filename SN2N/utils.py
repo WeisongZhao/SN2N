@@ -46,10 +46,9 @@ def normalize_mi_ma(x, mi, ma, clip=False, eps=1e-20, dtype=np.float32):
 
 def normalize_percentage(x, pmin=3, pmax=99.8, axis=None, clip=False, eps=1e-20, dtype=np.float32): 
     """Percentile-based image normalization.""" 
-    mi = np.percentile(x,pmin,axis=axis,keepdims=True) #np.percantile对象可以是多维数组
+    mi = np.percentile(x,pmin,axis=axis,keepdims=True) 
     ma = np.percentile(x,pmax,axis=axis,keepdims=True) 
     
-    print(np.double(mi), ma)
     return normalize_mi_ma(x, mi, ma, clip=clip, eps=eps, dtype=dtype) 
 
 

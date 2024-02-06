@@ -1,11 +1,7 @@
 # -*- coding: utf-8 -*-
 
-import os
-import sys
-current_script_path = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.join(current_script_path, '..', 'SN2N'))
-from trainer import net3D
-from get_options import trainer3D
+from SN2N.trainer import net3D
+from SN2N.get_options import trainer3D
     
 
 if __name__ == '__main__':
@@ -31,9 +27,9 @@ if __name__ == '__main__':
     ======Other parameters do not require modification; for details, refer to SN2N.get_options.========
     """
         
-    img_path = 'C:/Users/qqq/Desktop/SN2N-V0.28/examples/xyzt/data'
+    img_path = 'C:/Users/qqq/Desktop/SN2N-V0.29/examples/denoising3D/data/raw_data_per'
     sn2n_loss = '1'
-    bs = '32'
+    bs = '4'
     lr = '2e-4'
     epochs = '100'
     
@@ -48,5 +44,5 @@ if __name__ == '__main__':
     args = trainer3D(trainer3D_args)
     
     ##Step 2: Execute training.
-    sn2nunet = net3D(img_path = args.img_path)
+    sn2nunet = net3D(img_path = args.img_path, sn2n_loss = args.sn2n_loss, bs = args.bs, lr = args.lr, epochs = args.epochs)
     sn2nunet.train()

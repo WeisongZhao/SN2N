@@ -1,11 +1,7 @@
 # -*- coding: utf-8 -*-
 
-import os
-import sys
-current_script_path = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.join(current_script_path, '..', 'SN2N'))
-from inference import Predictor3D
-from get_options import Predict3D
+from SN2N.inference import Predictor3D
+from SN2N.get_options import Predict3D
     
 
 if __name__ == '__main__':
@@ -18,7 +14,7 @@ if __name__ == '__main__':
     ======Other parameters do not require modification; for details, refer to SN2N.get_options.========
     """
     
-    img_path = 'C:/Users/qqq/Desktop/SN2N-V0.28/examples/xyzt/data'
+    img_path = 'C:/Users/qqq/Desktop/SN2N-V0.29/examples/denoising3D/data/raw_data_per'
     
     Predict3D_args = [
         '--img_path', img_path

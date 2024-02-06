@@ -1,11 +1,7 @@
 # -*- coding: utf-8 -*-
 
-import os
-import sys
-current_script_path = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.join(current_script_path, '..', 'SN2N'))
-from datagen import generator2D
-from get_options import datagen2D
+from SN2N.datagen import generator2D
+from SN2N.get_options import datagen2D
     
 
 if __name__ == '__main__':
@@ -50,11 +46,13 @@ if __name__ == '__main__':
         '--P2Pmode', P2Pmode,
         '--P2Pup', P2Pup,
         '--BAmode', BAmode,
-        '--SWsize', SWsize        
+        '--SWsize', SWsize
     ]
-    
+
     args = datagen2D(datagen2D_args)
+    print("Arguments received:", args)
+    
     
     ##Step 2: Execute data generation.
-    d = generator2D(img_path=args.img_path)
+    d = generator2D(img_path=args.img_path, P2Pmode = args.P2Pmode, P2Pup = args.P2Pup, BAmode = args.BAmode, SWsize = args.SWsize)
     d.execute()

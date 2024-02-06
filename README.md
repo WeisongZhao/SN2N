@@ -2,7 +2,7 @@
 [![Github All Releases](https://img.shields.io/github/downloads/WeisongZhao/SN2N/total.svg)](https://github.com/WeisongZhao/SN2N/releases/tag/v0.2.8/)
 [![License](https://img.shields.io/github/license/WeisongZhao/SN2N)](https://github.com/WeisongZhao/SN2N/blob/master/LICENSE/)
 [![paper](https://img.shields.io/badge/paper-nat.%20methods-black.svg)](https://www.nature.com/nmeth/)
-[![releases](https://img.shields.io/badge/release-v0.1.0-FF6600.svg)](https://github.com/WeisongZhao/SN2N/releases/tag/v0.2.8/)
+[![releases](https://img.shields.io/badge/release-v0.3.1-FF6600.svg)](https://github.com/WeisongZhao/SN2N/releases/tag/v0.2.8/)
 <br>
 
 [![Twitter](https://img.shields.io/twitter/follow/QuLiying?label=liying)](https://twitter.com/weisong_zhao)
@@ -14,8 +14,9 @@
 <p>
 <h1 align="center"><font color="#FF6600">S</font>N2N</h1>
 <h5 align="center">Self-inspired learning to denoise for live-cell super-resolution microscopy.</h5>
-<h6 align="right">v0.2.8</h6>
+<h6 align="right">v0.2.9</h6>
 </p>
+
 
 <br>
 
@@ -32,7 +33,7 @@ This repository is for our developed self-inspired Noise2Noise (SN2N) learning-t
 
 <div align="center">
 
-✨ [**Introduction**](#-Introduction) **|**  🔧 [**Installation**](#-Installation)  **|** 🎨 [**Dataset**](#-Dataset) **|**  💻 [**Training**](#-Training) **|** ⚡ [**Inference**](#-Inference) **|** &#x1F308; [**Resources**](#-Resources)
+✨ [**Introduction**](#-Introduction) **|**  🔧 [**Installation**](#-Installation)  **|** 🚩 [**Execute**](#-Paper) **|**🎨 [**Dataset**](#-Dataset) **|**  💻 [**Training**](#-Training) **|** ⚡ [**Inference**](#-Inference) **|** &#x1F308; [**Resources**](#-Resources)
 
 </div>
 
@@ -75,6 +76,67 @@ Our SN2N is fully competitive with the supervised learning methods and overcomes
     
     $ pip install requirement.txt
     ```
+    
+## 🚩 Execute
+
+### 1. Self-supervised data generation
+Our SN2N denoiser has been integrated into the SN2Nexecute.py function, allowing users to input their <font color="red">allowing users to input their own parameters for denoising with just one click</font>.
+
+Users can run the script after <font color="red">customizing parameters</font> in Script_SN2Nexecute_2D.py (Script_SN2Nexecute_3D.py).
+#### 2D execute
+```bash
+	python Script_SN2N_datagen_2D.py --img_path "Users own path/data" --P2Pmode "1" --P2Pup "1" --BAmode "1" --SWsize "64" --sn2n_loss "1" --bs "32" --lr "2e-4" --epochs "100"     
+```
+
+#### 3D execute
+```bash
+ 	python Script_SN2N_datagen_3D.py --img_path 'Users own path/data' --P2Pmode '1' --P2Pup '1' --BAmode '1' --SWsize '64' --sn2n_loss "1" --bs "32" --lr "2e-4" --epochs "100"    
+```
+#### Parameters instructions
+
+The key parameters for 2D  execute and 3D execute are consistent. There are also other parameters that do not require user modification. Detailed explanations can be found in the SN2N.get_options.execute2D / SN2N.get_options.execute 3D function. 
+
+```bash
+    -----Parameters------
+    =====Important==========
+    img_path:
+        Path of raw images to train.
+    P2Pmode(0 ~ 3):
+        Augmentation mode for Patch2Patch.
+        0: NONE; 
+        1: Direct interchange in t;
+        2: Interchange in single frame;
+        3: Interchange in multiple frame but in different regions;
+        {default: 0}
+    P2Pup:
+        Increase the dataset to its (1 + P2Pup) times size.
+        {default: 0}
+    BAmode(0 ~ 2):
+        Basic augmentation mode.
+        0: NONE; 
+        1: double the dataset with random rotate&flip;
+        2: eightfold the dataset with random rotate&flip;
+        {default: 0} 
+    SWsize:
+        Interval pixel of sliding window for generating image pathes.
+        {default: 64}
+        sn2n_loss:
+        Weight of self-constrained loss.
+        {default: 1}
+    bs:
+        Training batch size.
+        {default: 32}
+    lr:
+        Learning rate
+        {default: 2e-4}.
+    epochs:
+        Total number of training epochs.
+        {default: 100}.
+        
+    ======Other parameters do not require modification; ======
+    ======for details, refer to SN2N.get_options.========
+    
+```
 
 ## 🎨 Dataset
 
@@ -214,6 +276,7 @@ The key parameters for 2D inference and 3D inference are consistent. There are a
 
 ## Version
 
+- v0.3.1 add examples for both 2D denoising and 3D denoising, and integrate them into the SN2Nexecute function.
 - v0.2.8 reorder the core code
 - v0.1.0 initial version
 

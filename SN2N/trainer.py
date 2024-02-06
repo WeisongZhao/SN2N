@@ -7,12 +7,12 @@ import tifffile
 import numpy as np
 from glob import glob
 from skimage.io import imread, imsave
-from models import Unet_2d, Unet_3d
-from utils import normalize
+from SN2N.models import Unet_2d, Unet_3d
+from SN2N.utils import normalize
 
 class net2D():
     def __init__(self, img_path,  sn2n_loss = 1, bs = 32, lr = 2e-4, epochs = 100, 
-                 img_patch = '128', if_alr = False):
+                 img_patch = '128', if_alr = True):
         """
         Self-inspired Noise2Noise
         -----Parameters------
@@ -64,7 +64,8 @@ class net2D():
         self.if_alr = if_alr
         if self.if_alr:
             self.scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(self.optimizer, mode='min', 
-                                                            factor = 0.5,patience = 10, verbose = True)        
+                                                            factor = 0.5,patience = 10, verbose = True)  
+         
     def train(self):
         print('The path for the raw images used for training is located under:\n%s' %(self.img_path))
         print('The training dataset is being saved under:\n%s' %(self.dataset_path))
@@ -128,6 +129,11 @@ class net2D():
             
         torch.save(self.model,  ('%s/model_%d_%d_full.pth')
                        %(self.model_save_path, datetime.datetime.now().month, datetime.datetime.now().day)) 
+        
+        f1 = open(('%s/loss.txt') %(self.parent_dir), 'w')
+        for i in history:
+            f1.write(str(i)+'\r\n')
+        f1.close()
     
     def load_batch2d(self, traindata_path):  
         path = glob(traindata_path + '/*.tif')
@@ -199,7 +205,7 @@ class net2D():
     
 class net3D():
     def __init__(self, img_path,  sn2n_loss = 1, bs = 4, lr = 2e-4, epochs = 100, 
-                 vol_patch = '16,128,128', ifadaptive_lr = False):
+                 vol_patch = '16,128,128', ifadaptive_lr = True):
         """
         Self-inspired Noise2Noise
         -----Parameters------

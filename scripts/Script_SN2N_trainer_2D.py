@@ -1,11 +1,7 @@
 # -*- coding: utf-8 -*-
 
-import os
-import sys
-current_script_path = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.join(current_script_path, '..', 'SN2N'))
-from trainer import net2D
-from get_options import trainer2D
+from SN2N.trainer import net2D
+from SN2N.get_options import trainer2D
     
 
 if __name__ == '__main__':
@@ -48,5 +44,5 @@ if __name__ == '__main__':
     args = trainer2D(trainer2D_args)
     
     ##Step 2: Execute training.
-    sn2nunet = net2D(img_path = args.img_path)
+    sn2nunet = net2D(img_path = args.img_path, sn2n_loss = args.sn2n_loss, bs = args.bs, lr = args.lr, epochs = args.epochs)
     sn2nunet.train()
