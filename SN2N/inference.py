@@ -238,7 +238,7 @@ class Predictor3D():
                         
                                     p = np.zeros((batch.shape))
                                     datatensor = TOTENSOR_(batch)
-                                    test_pred = model(datatensor.to(device))#小块不用归一化
+                                    test_pred = model(datatensor.to(device))
                                     test_pred = test_pred.to(torch.device("cpu"))
                                     p[:, :, :, :, :] = test_pred.detach().numpy()
                                     
@@ -258,6 +258,6 @@ class Predictor3D():
                                 applied = 255*normalize(applied)
                                 result.append(applied)
                             r = result if input_is_list else result[0]
-                            tifffile.imwrite('%s%s_%s.tif'%(save_path, Ufile, model_Ufile),r.astype('uint8'))
+                            tifffile.imwrite('%s/%s_%s.tif'%(save_path, Ufile, model_Ufile),r.astype('uint8'))
                             print('Frame: %d'%(j + 1))
 

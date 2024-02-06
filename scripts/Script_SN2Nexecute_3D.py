@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import sys
 from SN2N.get_options import execute3D
 from SN2N.SN2Nexecute import SN2Nexecute_3D
 
@@ -57,7 +58,7 @@ if __name__ == '__main__':
     epochs = '5'
     
     
-    execute2D_args = [
+    execute3D_args = [
         '--img_path', img_path,
         '--P2Pmode', P2Pmode,
         '--P2Pup', P2Pup,
@@ -69,9 +70,14 @@ if __name__ == '__main__':
         '--epochs', epochs
     ]
 
-    args = execute3D(execute2D_args)
-    print("Arguments received:", args)
+    if len(sys.argv) > 1:
+        args = execute3D()
+    else:
+        args = execute3D(execute3D_args)
     
+    print("Parsed arguments:", args) 
+    
+    ##Step 2: Executing.  
     SN2Nexecute_3D(args)
     
     

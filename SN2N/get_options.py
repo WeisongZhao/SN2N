@@ -66,11 +66,8 @@ def datagen2D(arguments=None):
                         choices=['Fourier', 'bilinear'], 
                         help='Scaling method. "Fourier" for Fourier rescaling, "bilinear" for spatial rescaling.')
     
-    # args, _ = parser.parse_known_args(arguments) 
     
-    print("Arguments:", arguments)  # 打印命令行传递的参数
     args, _ = parser.parse_known_args(arguments) 
-    print("Parsed arguments:", args)  # 打印解析后的参数
 
     return args
 

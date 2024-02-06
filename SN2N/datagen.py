@@ -73,14 +73,14 @@ class generator2D():
         if not os.path.exists(self.dataset_path):
             os.makedirs(self.dataset_path)
         self.P2Pmode = P2Pmode
-        self.P2Pup = P2Pup
-        self.P2P_times = int(np.sqrt(P2Pup))
-        self.P2P_rolls = int(np.sqrt(P2Pup))
+        self.P2Pup = int(P2Pup)
+        self.P2P_times = int(np.sqrt(int(P2Pup)))
+        self.P2P_rolls = int(np.sqrt(int(P2Pup)))
         if self.P2Pup > 0:
             self.P2P_rolls = max(1, self.P2P_rolls)
             self.P2P_times = max(1, self.P2P_times)
         self.BAmode = BAmode    
-        self.SWsize = SWsize
+        self.SWsize = int(SWsize)
         self.SWmode = SWmode
         self.SWfilter = SWfilter
         self.P2Ppatch = (int(P2Ppatch),) * 2
@@ -588,9 +588,9 @@ class generator3D():
         if not os.path.exists(self.dataset_path):
             os.makedirs(self.dataset_path)
         self.P2Pmode = P2Pmode
-        self.P2Pup = P2Pup
-        self.P2P_times = int(np.sqrt(P2Pup))
-        self.P2P_rolls = int(np.sqrt(P2Pup))
+        self.P2Pup = int(P2Pup)
+        self.P2P_times = int(np.sqrt(int(P2Pup)))
+        self.P2P_rolls = int(np.sqrt(int(P2Pup)))
         if self.P2Pup > 0:
             self.P2P_rolls = max(1, self.P2P_rolls)
             self.P2P_times = max(1, self.P2P_times)
@@ -651,7 +651,7 @@ class generator3D():
                 
             for circlelarge in range(roll):
                 if times >= 1:
-                    image_data_pre = self.random_interchange(imga = image_data,
+                    image_data_pre = self.random_interchange(imga = image_data_stack,
                         imgb = image_data_b) 
                     for circle in range(times - 1):
                         image_data_pre = self.random_interchange(imga = image_data_pre,

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+import sys
 from SN2N.datagen import generator2D
 from SN2N.get_options import datagen2D
     
@@ -34,12 +34,11 @@ if __name__ == '__main__':
     ======Other parameters do not require modification; for details, refer to SN2N.get_options.========
     """
     
-    img_path = 'C:/Users/qqq/Desktop/SN2N-V0.28/examples/simu/data'
+    img_path = 'C:/Users/qqq/Desktop/SN2N-V0.3.0/examples/denoising2D/data/raw_data'
     P2Pmode = '1'
     P2Pup = '1'
     BAmode = '1'
     SWsize = '64' 
-    
     
     datagen2D_args = [
         '--img_path', img_path,
@@ -48,9 +47,13 @@ if __name__ == '__main__':
         '--BAmode', BAmode,
         '--SWsize', SWsize
     ]
-
-    args = datagen2D(datagen2D_args)
-    print("Arguments received:", args)
+    
+    if len(sys.argv) > 1:
+        args = datagen2D()
+    else:
+        args = datagen2D(datagen2D_args)
+    
+    print("Parsed arguments:", args) 
     
     
     ##Step 2: Execute data generation.

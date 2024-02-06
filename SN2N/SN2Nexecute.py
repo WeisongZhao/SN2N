@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from datagen import generator2D, generator3D
-from trainer import net2D, net3D
-from inference import Predictor2D, Predictor3D
+from SN2N.datagen import generator2D, generator3D
+from SN2N.trainer import net2D, net3D
+from SN2N.inference import Predictor2D, Predictor3D
 
 def SN2Nexecute_2D(args):
     d = generator2D(img_path=args.img_path, P2Pmode = args.P2Pmode, P2Pup = args.P2Pup, BAmode = args.BAmode, SWsize = args.SWsize,

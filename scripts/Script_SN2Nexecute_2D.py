@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import sys
 from SN2N.get_options import execute2D
 from SN2N.SN2Nexecute import SN2Nexecute_2D
 
@@ -69,9 +70,15 @@ if __name__ == '__main__':
         '--epochs', epochs
     ]
 
-    args = execute2D(execute2D_args)
-    print("Arguments received:", args)
+
+    if len(sys.argv) > 1:
+        args = execute2D()
+    else:
+        args = execute2D(execute2D_args)
     
+    print("Parsed arguments:", args) 
+    
+    ##Step 2: Executing.    
     SN2Nexecute_2D(args)
     
     

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import sys
 from SN2N.trainer import net2D
 from SN2N.get_options import trainer2D
     
@@ -27,7 +28,7 @@ if __name__ == '__main__':
     ======Other parameters do not require modification; for details, refer to SN2N.get_options.========
     """
         
-    img_path = 'C:/Users/qqq/Desktop/SN2N-V0.28/examples/simu/data'
+    img_path = 'C:/Users/qqq/Desktop/SN2N-V0.3.0/examples/denoising2D/data/raw_data'
     sn2n_loss = '1'
     bs = '32'
     lr = '2e-4'
@@ -41,7 +42,13 @@ if __name__ == '__main__':
         '--epochs', epochs
     ]
     
-    args = trainer2D(trainer2D_args)
+    if len(sys.argv) > 1:
+        args = trainer2D()
+    else:
+        args = trainer2D(trainer2D_args)
+    
+    print("Parsed arguments:", args) 
+    
     
     ##Step 2: Execute training.
     sn2nunet = net2D(img_path = args.img_path, sn2n_loss = args.sn2n_loss, bs = args.bs, lr = args.lr, epochs = args.epochs)

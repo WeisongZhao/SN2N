@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import sys
 from SN2N.datagen import generator3D
 from SN2N.get_options import datagen3D
     
@@ -34,7 +35,7 @@ if __name__ == '__main__':
     ======Other parameters do not require modification; for details, refer to SN2N.get_options.========
     """
     
-    img_path = 'C:/Users/qqq/Desktop/SN2N-V0.29/examples/denoising3D/data/raw_data_per'
+    img_path = 'C:/Users/qqq/Desktop/SN2N-V0.3.0/examples/denoising3D/data/raw_data'
     P2Pmode = '1'
     P2Pup = '1'
     BAmode = '1'
@@ -51,7 +52,13 @@ if __name__ == '__main__':
         '--SWfilter', SWfilter
     ]
     
-    args = datagen3D(datagen3D_args)
+    if len(sys.argv) > 1:
+        args = datagen3D()
+    else:
+        args = datagen3D(datagen3D_args)
+    
+    print("Parsed arguments:", args) 
+    
     
     ##Step 2: Execute data generation.
     d = generator3D(img_path=args.img_path, P2Pmode = args.P2Pmode, P2Pup = args.P2Pup, BAmode = args.BAmode, SWsize = args.SWsize, SWfilter = args.SWfilter)
