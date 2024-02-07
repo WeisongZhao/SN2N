@@ -34,7 +34,7 @@ This repository is for our developed self-inspired Noise2Noise (SN2N) learning-t
 
 <div align="center">
 
-✨ [**Introduction**](#-Introduction) **|**  🔧 [**Installation**](#-Installation)  **|** 🚩 [**Execute**](#-Paper) **|** 🎨 [**Dataset**](#-Dataset) **|**  💻 [**Training**](#-Training) **|** ⚡ [**Inference**](#-Inference) **|** &#x1F308; [**Resources**](#-Resources)
+✨ [**Introduction**](#-Introduction) **|**  🔧 [**Installation**](#-Installation)  **|** 🚩 [**Execute**](#-Paper) **|**  🎨 [**Dataset**](#-Dataset) **|**  💻 [**Training**](#-Training) **|** ⚡ [**Inference**](#-Inference) **|** &#x1F308; [**Resources**](#-Resources)
 
 </div>
 
@@ -75,7 +75,7 @@ Our SN2N is fully competitive with the supervised learning methods and overcomes
     $ conda create -n SN2N python=3.7.6
     $ conda activate SN2N
     
-    $ pip install requirement.txt
+    $ pip install -r requirement.txt
     ```
     
 ## 🚩 Execute
@@ -278,7 +278,6 @@ The key parameters for 2D inference and 3D inference are consistent. There are a
 ## Version
 
 
-- v0.3.2 scripts revised
 - v0.3.1 add examples for both 2D denoising and 3D denoising, and integrate them into the SN2Nexecute function.
 - v0.2.8 reorder the core code
 - v0.1.0 initial version

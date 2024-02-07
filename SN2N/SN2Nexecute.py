@@ -22,7 +22,7 @@ def SN2Nexecute_3D(args):
     d.execute()
     
     sn2nunet = net3D(img_path = args.img_path, sn2n_loss = args.sn2n_loss, bs = args.bs, lr = args.lr, epochs = args.epochs,
-                     img_patch = args.img_patch,  if_alr = args.if_alr)
+                     vol_patch = args.vol_patch,  if_alr = args.if_alr)
     sn2nunet.train()
     
     p = Predictor3D(img_path = args.img_path)
