@@ -194,6 +194,7 @@ class net2D():
                 return y_pred  
             
     def load_test_batch2d(self, img_tem):
+        img_tem = np.squeeze(img_tem)
         h, w = img_tem.shape
         imsize = (1, 1, h, w)
         imgs_A = np.zeros(imsize)
