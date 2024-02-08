@@ -254,8 +254,8 @@ class net3D():
         self.optimizer = torch.optim.Adam(self.model.parameters(), lr = self.lr, betas = (0.5, 0.999))
         self.constrained = torch.nn.L1Loss(reduction='mean') 
         self.criterion = torch.nn.L1Loss(reduction='mean')
-        self.ifadaptive_lr = ifadaptive_lr
-        if self.ifadaptive_lr:
+        self.if_alr = if_alr
+        if self.if_alr:
             self.scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(self.optimizer, mode='min', 
                                                             factor = 0.5,patience = 10, verbose = True)        
     def train(self):
