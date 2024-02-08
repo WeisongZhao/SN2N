@@ -192,7 +192,7 @@ def trainer3D(arguments=None):
                         help='Weight of the self-constrained loss.')
     parser.add_argument('--bs', 
                         type=int, 
-                        default=32, 
+                        default=4, 
                         help='Training batch size.')
     parser.add_argument('--lr', 
                         type=float, 
@@ -212,7 +212,7 @@ def trainer3D(arguments=None):
                         type=bool,
                         default=True,
                         help='Flag to use adaptive learning rate. If set, adaptive learning rate will be used; otherwise, it will not.')
-
+    
     args, _ = parser.parse_known_args(arguments) 
 
     return args
@@ -225,6 +225,19 @@ def Predict2D(arguments=None):
                         type=str, 
                         required=True, 
                         help='Path to the raw images for training.')
+    parser.add_argument('--model_path', 
+                        type=str, 
+                        required=True, 
+                        help='Path of model for inference.')
+    parser.add_argument('--infer_mode', 
+                        type=int, 
+                        default=0, 
+                        choices=[0, 1], 
+                        help="""Prediction Mode. 
+                        0: Predict the results of all models generated during training 
+                        under the default "models" directory on the img_path.                
+                        1: Predict the results of the models provided by the user under 
+                        the given model_path on the Img_path provided by the user.""")
     
 
     args, _ = parser.parse_known_args(arguments) 
@@ -238,14 +251,25 @@ def Predict3D(arguments=None):
                         type=str, 
                         required=True, 
                         help='Path to the raw images for training.')
-    
-    ##===========No need to change=============
+    parser.add_argument('--model_path', 
+                        type=str, 
+                        required=True, 
+                        help='Path of model for inference.')
+    parser.add_argument('--infer_mode', 
+                        type=int, 
+                        default=0, 
+                        choices=[0, 1], 
+                        help="""Prediction Mode. 
+                        0: Predict the results of all models generated during training 
+                        under the default "models" directory on the img_path.                
+                        1: Predict the results of the models provided by the user under 
+                        the given model_path on the Img_path provided by the user.""")
     parser.add_argument('--overlap_shape', 
                         type=str, 
                         default = '2,256,256', 
                         help='Overlap shape in 3D stitching prediction.')
     
-    args, _ = parser.parse_known_args(arguments)  # 使用 parse_known_args() 以接受不在定义中的参数
+    args, _ = parser.parse_known_args(arguments)  
 
     return args
 
@@ -299,6 +323,19 @@ def execute2D(arguments=None):
                         type=int, 
                         default=100, 
                         help='Total number of training epochs.')
+    parser.add_argument('--model_path', 
+                        type=str, 
+                        required=True, 
+                        help='Path of model for inference.')
+    parser.add_argument('--infer_mode', 
+                        type=int, 
+                        default=0, 
+                        choices=[0, 1], 
+                        help="""Prediction Mode. 
+                        0: Predict the results of all models generated during training 
+                        under the default "models" directory on the img_path.                
+                        1: Predict the results of the models provided by the user under 
+                        the given model_path on the Img_path provided by the user.""")
     
     ##===========No need to change=============
     parser.add_argument('--SWmode', 
@@ -389,7 +426,24 @@ def execute3D(arguments=None):
                         type=int, 
                         default=100, 
                         help='Total number of training epochs.')
-    
+    parser.add_argument('--model_path', 
+                        type=str, 
+                        required=True, 
+                        help='Path of model for inference.')
+    parser.add_argument('--infer_mode', 
+                        type=int, 
+                        default=0, 
+                        choices=[0, 1], 
+                        help="""Prediction Mode. 
+                        0: Predict the results of all models generated during training 
+                        under the default "models" directory on the img_path.                
+                        1: Predict the results of the models provided by the user under 
+                        the given model_path on the Img_path provided by the user.""")
+    parser.add_argument('--overlap_shape', 
+                        type=str, 
+                        default = '2,256,256', 
+                        help='Overlap shape in 3D stitching prediction.')
+                        
     ##===========No need to change=============
     parser.add_argument('--SWmode', 
                         type=int, 
@@ -424,10 +478,6 @@ def execute3D(arguments=None):
                         type=bool,
                         default=True,
                         help='Flag to use adaptive learning rate. If set, adaptive learning rate will be used; otherwise, it will not.')
-    parser.add_argument('--overlap_shape', 
-                        type=str, 
-                        default = '2,256,256', 
-                        help='Overlap shape in 3D stitching prediction.')
     
     args, _ = parser.parse_known_args(arguments)  
 

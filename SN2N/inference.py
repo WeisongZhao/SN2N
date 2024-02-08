@@ -9,13 +9,23 @@ import tqdm
 from SN2N.utils import normalize, normalize_tanh, TOTENSOR_
 
 class Predictor2D(): 
-    def __init__(self, img_path):
+    def __init__(self, img_path, model_path, infer_mode):
         """
         Self-inspired Noise2Noise
         
         -----Parameters------
+        =====Important==========
         img_path:
             Path of raw images to inference
+        model_path:
+            Path of model for inference
+        infer_mode:
+            Prediction Mode
+            0: Predict the results of all models generated during training 
+            under the default "models" directory on the img_path.                
+            1: Predict the results of the models provided by the user under 
+            the given model_path on the Img_path provided by the user.
+            
         """
         self.img_path = img_path
         self.parent_dir = os.path.dirname(img_path)
@@ -28,15 +38,20 @@ class Predictor2D():
         self.save_path = os.path.join(self.parent_dir, 'predictions')
         if not os.path.exists(self.save_path):
             os.makedirs(self.save_path)
+        self.model_path = model_path
+        self.infer_mode = infer_mode
         
     def execute(self):
-        print('The path for the raw images used for training is located under:\n%s' %(self.img_path))
-        print('The training dataset is being saved under:\n%s' %(self.dataset_path))
-        print('Models is being saved under:\n%s' %(self.model_save_path))
-        print('Predictions is being saved under:\n%s' %(self.save_path))
         img_path = self.img_path
-        model_path = self.model_save_path
+        infer_mode = self.infer_mode
+        if infer_mode == 0:
+            model_path = self.model_save_path
+        else:
+            model_path = self.model_path
         save_path = self.save_path
+        print('The path for the raw images used for training is located under:\n%s' %(img_path))
+        print('Models is being saved under:\n%s' %(model_path))
+        print('Predictions is being saved under:\n%s' %(save_path))
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         for (mroot, mdirs, mfiles) in os.walk(model_path):
             for jj, model_Ufile in enumerate(mfiles):
@@ -71,13 +86,22 @@ class Predictor2D():
             return 
                             
 class Predictor3D(): 
-    def __init__(self, img_path, overlap_shape='2,256,256'):
+    def __init__(self, img_path, model_path, infer_mode, overlap_shape='2,256,256'):
         """
         Self-inspired Noise2Noise
         
         -----Parameters------
+        =====Important==========
         img_path:
             Path of raw images to inference
+        model_path:
+            Path of model for inference
+        infer_mode:
+            Prediction Mode
+            0: Predict the results of all models generated during training 
+            under the default "models" directory on the img_path.                
+            1: Predict the results of the models provided by the user under 
+            the given model_path on the Img_path provided by the user.
         overlap_shape:
             Overlap shape in 3D stitching prediction.
             {default: '2, 256, 256'}
@@ -93,6 +117,8 @@ class Predictor3D():
         self.save_path = os.path.join(self.parent_dir, 'predictions')
         if not os.path.exists(self.save_path):
             os.makedirs(self.save_path)
+        self.model_path = model_path
+        self.infer_mode = infer_mode
         self.overlap_shape = tuple(map(int, overlap_shape.split(',')))
             
     
@@ -119,13 +145,16 @@ class Predictor3D():
         ndarray
             Result image.
         '''
-        print('The path for the raw images used for training is located under:\n%s' %(self.img_path))
-        print('The training dataset is being saved under:\n%s' %(self.dataset_path))
-        print('Models is being saved under:\n%s' %(self.model_save_path))
-        print('Predictions is being saved under:\n%s' %(self.save_path))
         img_path = self.img_path
-        model_path = self.model_save_path
+        infer_mode = self.infer_mode
+        if infer_mode == 0:
+            model_path = self.model_save_path
+        else:
+            model_path = self.model_path
         save_path = self.save_path
+        print('The path for the raw images used for training is located under:\n%s' %(img_path))
+        print('Models is being saved under:\n%s' %(model_path))
+        print('Predictions is being saved under:\n%s' %(save_path))
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         overlap_shape = self.overlap_shape
         modelpath_list = []

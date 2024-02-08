@@ -42,7 +42,15 @@ if __name__ == '__main__':
     epochs:
         Total number of training epochs.
         {default: 100}.
-        
+    model_path:
+        Path of model for inference
+    infer_mode:
+        Prediction Mode
+        0: Predict the results of all models generated during training 
+        under the default "models" directory on the img_path.                
+        1: Predict the results of the models provided by the user under 
+        the given model_path on the Img_path provided by the user.
+
     ======Other parameters do not require modification; for details, refer to SN2N.get_options.========
     
     """
@@ -55,7 +63,9 @@ if __name__ == '__main__':
     sn2n_loss = '1'
     bs = '32'
     lr = '2e-4'
-    epochs = '5'
+    epochs = '50'
+    model_path = 'C:/Users/qqq/Desktop/SN2N-V0.3.0/examples/denoising2D/data/models'
+    infer_mode = '0'
     
     
     execute2D_args = [
@@ -67,7 +77,9 @@ if __name__ == '__main__':
         '--sn2n_loss', sn2n_loss,
         '--bs', bs,
         '--lr', lr,
-        '--epochs', epochs
+        '--epochs', epochs,
+        '--model_path', model_path,
+        '--infer_mode', infer_mode
     ]
 
 

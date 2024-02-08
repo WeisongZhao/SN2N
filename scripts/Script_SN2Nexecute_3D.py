@@ -35,27 +35,41 @@ if __name__ == '__main__':
         {default: 1}
     bs:
         Training batch size.
-        {default: 32}
+        {default: 4}
     lr:
         Learning rate
         {default: 2e-4}.
     epochs:
         Total number of training epochs.
         {default: 100}.
+    model_path:
+        Path of model for inference
+    infer_mode:
+        Prediction Mode
+        0: Predict the results of all models generated during training 
+        under the default "models" directory on the img_path.                
+        1: Predict the results of the models provided by the user under 
+        the given model_path on the Img_path provided by the user.
+    overlap_shape:
+        Overlap shape in 3D stitching prediction.
+        {default: '2, 256, 256'}
         
     ======Other parameters do not require modification; for details, refer to SN2N.get_options.========
     
     """
     
-    img_path = 'C:/Users/qqq/Desktop/SN2N-V0.3.0/examples/denoising2D/data/raw_data'
+    img_path = 'C:/Users/qqq/Desktop/SN2N-V0.3.0/examples/denoising3D/data/raw_data'
     P2Pmode = '1'
     P2Pup = '1'
     BAmode = '1'
     SWsize = '64' 
     sn2n_loss = '1'
-    bs = '32'
+    bs = '4'
     lr = '2e-4'
-    epochs = '5'
+    epochs = '1'
+    model_path = 'C:/Users/qqq/Desktop/SN2N-V0.3.0/examples/denoising3D/data/models'
+    infer_mode = '0'
+    overlap_shape = '2,256,256'
     
     
     execute3D_args = [
@@ -67,7 +81,10 @@ if __name__ == '__main__':
         '--sn2n_loss', sn2n_loss,
         '--bs', bs,
         '--lr', lr,
-        '--epochs', epochs
+        '--epochs', epochs,
+        '--model_path', model_path,
+        '--infer_mode', infer_mode,
+        '--overlap_shape', overlap_shape
     ]
 
     if len(sys.argv) > 1:

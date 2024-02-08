@@ -13,7 +13,7 @@ def SN2Nexecute_2D(args):
                      img_patch = args.img_patch,  if_alr = args.if_alr)
     sn2nunet.train()
     
-    p = Predictor2D(img_path = args.img_path)
+    p = Predictor2D(img_path = args.img_path, model_path = args.model_path, infer_mode = args.infer_mode)
     p.execute()
     
 def SN2Nexecute_3D(args):
@@ -25,5 +25,5 @@ def SN2Nexecute_3D(args):
                      vol_patch = args.vol_patch,  if_alr = args.if_alr)
     sn2nunet.train()
     
-    p = Predictor3D(img_path = args.img_path)
+    p = Predictor3D(img_path = args.img_path, model_path = args.model_path, infer_mode = args.infer_mode, overlap_shape = args.overlap_shape)
     p.execute()
