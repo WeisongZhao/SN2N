@@ -38,7 +38,7 @@ class net2D():
             {default: '128'}
         if_alr
             Whether to use adaptive learning rate.
-            {default: False}
+            {default: True}
         """
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.img_path = img_path
@@ -231,7 +231,7 @@ class net3D():
             {default: '16,128,128'}
         if_alr
             Whether to use adaptive learning rate.
-            {default: False}
+            {default: True}
         """
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.img_path = img_path
