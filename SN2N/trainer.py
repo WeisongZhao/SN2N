@@ -229,7 +229,7 @@ class net3D():
         vol_patch
             patch size
             {default: '16,128,128'}
-        ifadaptive_lr
+        if_alr
             Whether to use adaptive learning rate.
             {default: False}
         """
