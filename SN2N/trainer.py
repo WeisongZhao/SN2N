@@ -114,7 +114,7 @@ class net2D():
             
             raw_path = glob(self.img_path + '/*.tif')
             test_img = tifffile.imread(raw_path[0])
-            if len(test_img.shape) == 3
+            if len(test_img.shape) == 3:
                 test_img = test_img[0, :, :]
             test_img = np.squeeze(test_img)
             torch.cuda.empty_cache()
