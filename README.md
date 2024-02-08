@@ -2,7 +2,7 @@
 [![Github All Releases](https://img.shields.io/github/downloads/WeisongZhao/SN2N/total.svg)](https://github.com/WeisongZhao/SN2N/releases/tag/v0.3.2/)
 [![License](https://img.shields.io/github/license/WeisongZhao/SN2N)](https://github.com/WeisongZhao/SN2N/blob/master/LICENSE/)
 [![paper](https://img.shields.io/badge/paper-nat.%20methods-black.svg)](https://www.nature.com/nmeth/)
-[![releases](https://img.shields.io/badge/release-v0.3.2-FF6600.svg)](https://github.com/WeisongZhao/SN2N/releases/tag/v0.3.2/)
+[![releases](https://img.shields.io/badge/release-v0.3.5-FF6600.svg)](https://github.com/WeisongZhao/SN2N/releases/tag/v0.3.5/)
 <br>
 
 [![Twitter](https://img.shields.io/twitter/follow/QuLiying?label=liying)](https://twitter.com/weisong_zhao)
@@ -14,8 +14,10 @@
 <p>
 <h1 align="center"><font color="#FF6600">S</font>N2N</h1>
 <h5 align="center">Self-inspired learning to denoise for live-cell super-resolution microscopy.</h5>
-<h6 align="right">v0.3.2</h6>
+<h6 align="right">v0.3.5</h6>
 </p>
+
+
 
 
 
@@ -34,7 +36,7 @@ This repository is for our developed self-inspired Noise2Noise (SN2N) learning-t
 
 <div align="center">
 
-✨ [**Introduction**](#-Introduction) **|**  🔧 [**Installation**](#-Installation)  **|** 🚩 [**Execute**](#-Paper) **|**  🎨 [**Dataset**](#-Dataset) **|**  💻 [**Training**](#-Training) **|** ⚡ [**Inference**](#-Inference) **|** &#x1F308; [**Resources**](#-Resources)
+✨ [**Introduction**](#-Introduction) **|**  🔧 [**Installation**](#-Installation)  **|** 🚀 [**Overall**](#-Paper)**|** 🚩 [**Execution**](#-Paper) **|**  🎨 [**Dataset**](#-Dataset) **|**  💻 [**Training**](#-Training) **|** ⚡ [**Inference**](#-Inference) **|** &#x1F308; [**Resources**](#-Resources)
 
 </div>
 
@@ -77,67 +79,10 @@ Our SN2N is fully competitive with the supervised learning methods and overcomes
     
     $ pip install -r requirements.txt
     ```
-    
-## 🚩 Execute
+## 🚀 Overall
 
-### 1. Self-supervised data generation
-Our SN2N denoiser has been integrated into the SN2Nexecute.py function, allowing users to input their <font color="red">allowing users to input their own parameters for denoising with just one click</font>.
+We have <span style="color:red">two execution modes</span> for SN2N: The first one is step by step, which involves (**dataset generation, training, and then inference.**)  The second one is directly invoking (**SN2Nexecute.**)
 
-Users can run the script after <font color="red">customizing parameters</font> in Script_SN2Nexecute_2D.py (Script_SN2Nexecute_3D.py).
-#### 2D execute
-```bash
-python Script_SN2Nexecute_2D.py --img_path "Users own path/data/raw_data" --P2Pmode "1" --P2Pup "1" --BAmode "1" --SWsize "64" --sn2n_loss "1" --bs "32" --lr "2e-4" --epochs "100"     
-```
-
-#### 3D execute
-```bash
-python Script_SN2Nexecute_3D.py --img_path "Users own path/data/raw_data" --P2Pmode "1" --P2Pup "1" --BAmode "1" --SWsize "64" --sn2n_loss "1" --bs "32" --lr "2e-4" --epochs "100"    
-```
-#### Parameters instructions
-
-The key parameters for 2D  execute and 3D execute are consistent. There are also other parameters that do not require user modification. Detailed explanations can be found in the SN2N.get_options.execute2D / SN2N.get_options.execute 3D function. 
-
-```bash
-    -----Parameters------
-    =====Important==========
-    img_path:
-        Path of raw images to train.
-    P2Pmode(0 ~ 3):
-        Augmentation mode for Patch2Patch.
-        0: NONE; 
-        1: Direct interchange in t;
-        2: Interchange in single frame;
-        3: Interchange in multiple frame but in different regions;
-        {default: 0}
-    P2Pup:
-        Increase the dataset to its (1 + P2Pup) times size.
-        {default: 0}
-    BAmode(0 ~ 2):
-        Basic augmentation mode.
-        0: NONE; 
-        1: double the dataset with random rotate&flip;
-        2: eightfold the dataset with random rotate&flip;
-        {default: 0} 
-    SWsize:
-        Interval pixel of sliding window for generating image pathes.
-        {default: 64}
-        sn2n_loss:
-        Weight of self-constrained loss.
-        {default: 1}
-    bs:
-        Training batch size.
-        {default: 32}
-    lr:
-        Learning rate
-        {default: 2e-4}.
-    epochs:
-        Total number of training epochs.
-        {default: 100}.
-        
-    ======Other parameters do not require modification; ======
-    ======for details, refer to SN2N.get_options.========
-    
-```
 
 ## 🎨 Dataset
 
@@ -251,29 +196,113 @@ Users can run the script after customizing parameters in Script_SN2N_inference_2
 #### 2D inference
 
   ```bash
-python Script_SN2N_inference_2D.py --img_path "Users own path/data/raw_data"
+python Script_SN2N_inference_2D.py --img_path "Users own path/data/raw_data" --model_path "Users own path/data/model" --infer_mode "0"
   ```
 
 #### 3D inference
 In 3D prediction tasks, we use the method of stitching predictions to avoid issues of memory overflow
 
   ```bash
-  python Script_SN2N_inference_3D.py --img_path "Users own path/data/raw_data"
+  python Script_SN2N_inference_3D.py --img_path "Users own path/data/raw_data" --model_path "Users own path/data/model" --infer_mode "0" --overlap_shape "2,256,256"
   ```
 
 #### Parameters instructions
 
-The key parameters for 2D inference and 3D inference are consistent. There are also other parameters that do not require user modification. Detailed explanations can be found in the SN2N.get_options.Predict2D/ SN2N.get_options.Predict3D function.
+The key parameters for 2D inference and 3D inference are nearly consistent except for'overlap_shape'. There are also other parameters that do not require user modification. Detailed explanations can be found in the SN2N.get_options.Predict2D/ SN2N.get_options.Predict3D function.
 
 ```bash
-    -----Parameters------
+    -----2D/3D inference Parameters------
     img_path:
         Path of raw images to inference
+    model_path:
+        Path of model for inference
+    infer_mode:
+        Prediction Mode
+        0: Predict the results of all models generated during training 
+        under the default "models" directory on the img_path.                
+        1: Predict the results of the models provided by the user under 
+        the given model_path on the Img_path provided by the user.
+        
+    -----3D execution unique Parameters------
+    overlap_shape:
+        Overlap shape in 3D stitching prediction.
+        {default: '2, 256, 256'}    
+```
+
+## 🚩 Execution
+
+### 1. Self-supervised data generation
+Our SN2N denoiser has been integrated into the SN2Nexecute.py function, allowing users to input their <font color="red">allowing users to input their own parameters for denoising with just one click</font>.
+
+Users can run the script after <font color="red">customizing parameters</font> in Script_SN2Nexecute_2D.py (Script_SN2Nexecute_3D.py).
+#### 2D execution
+```bash
+python Script_SN2Nexecute_2D.py --img_path "Users own path/data/raw_data" --P2Pmode "1" --P2Pup "1" --BAmode "1" --SWsize "64" --sn2n_loss "1" --bs "32" --lr "2e-4" --epochs "100" --model_path "Users own path/data/model" --infer_mode "0"
+```
+
+#### 3D execution
+```bash
+python Script_SN2Nexecute_3D.py --img_path "Users own path/data/raw_data" --P2Pmode "1" --P2Pup "1" --BAmode "1" --SWsize "64" --sn2n_loss "1" --bs "32" --lr "2e-4" --epochs "100" --model_path "Users own path/data/model" --infer_mode "0" --overlap_shape "2,256,256"
+```
+#### Parameters instructions
+
+The key parameters for 2D  execute and 3D execution are nearly consistent execept for 'overlap_shape'. There are also other parameters that do not require user modification. Detailed explanations can be found in the SN2N.get_options.execute2D / SN2N.get_options.execute 3D function. 
+
+```bash
+    -----2D/3D execution Parameters------
+    =====Important==========
+    img_path:
+        Path of raw images to train.
+    P2Pmode(0 ~ 3):
+        Augmentation mode for Patch2Patch.
+        0: NONE; 
+        1: Direct interchange in t;
+        2: Interchange in single frame;
+        3: Interchange in multiple frame but in different regions;
+        {default: 0}
+    P2Pup:
+        Increase the dataset to its (1 + P2Pup) times size.
+        {default: 0}
+    BAmode(0 ~ 2):
+        Basic augmentation mode.
+        0: NONE; 
+        1: double the dataset with random rotate&flip;
+        2: eightfold the dataset with random rotate&flip;
+        {default: 0} 
+    SWsize:
+        Interval pixel of sliding window for generating image pathes.
+        {default: 64}
+        sn2n_loss:
+        Weight of self-constrained loss.
+        {default: 1}
+    bs:
+        Training batch size.
+        {default: 32}
+    lr:
+        Learning rate
+        {default: 2e-4}.
+    epochs:
+        Total number of training epochs.
+        {default: 100}.
+    model_path:
+        Path of model for inference
+    infer_mode:
+        Prediction Mode
+        0: Predict the results of all models generated during training 
+        under the default "models" directory on the img_path.                
+        1: Predict the results of the models provided by the user under 
+        the given model_path on the Img_path provided by the user.
+        
+    -----3D execution unique Parameters------
+    overlap_shape:
+        Overlap shape in 3D stitching prediction.
+        {default: '2, 256, 256'} 
         
     ======Other parameters do not require modification; ======
     ======for details, refer to SN2N.get_options.========
     
 ```
+
 
 ## Version
 
