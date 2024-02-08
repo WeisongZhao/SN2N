@@ -86,12 +86,12 @@ Our SN2N denoiser has been integrated into the SN2Nexecute.py function, allowing
 Users can run the script after <font color="red">customizing parameters</font> in Script_SN2Nexecute_2D.py (Script_SN2Nexecute_3D.py).
 #### 2D execute
 ```bash
-	python Script_SN2Nexecute_2D.py --img_path "Users own path/data/raw_data" --P2Pmode "1" --P2Pup "1" --BAmode "1" --SWsize "64" --sn2n_loss "1" --bs "32" --lr "2e-4" --epochs "100"     
+python Script_SN2Nexecute_2D.py --img_path "Users own path/data/raw_data" --P2Pmode "1" --P2Pup "1" --BAmode "1" --SWsize "64" --sn2n_loss "1" --bs "32" --lr "2e-4" --epochs "100"     
 ```
 
 #### 3D execute
 ```bash
- 	python Script_SN2Nexecute_3D.py --img_path 'Users own path/data/raw_data' --P2Pmode '1' --P2Pup '1' --BAmode '1' --SWsize '64' --sn2n_loss "1" --bs "32" --lr "2e-4" --epochs "100"    
+python Script_SN2Nexecute_3D.py --img_path "Users own path/data/raw_data" --P2Pmode "1" --P2Pup "1" --BAmode "1" --SWsize "64" --sn2n_loss "1" --bs "32" --lr "2e-4" --epochs "100"    
 ```
 #### Parameters instructions
 
@@ -148,12 +148,12 @@ Users can run the script after customizing parameters in Script_SN2N_datagen_2D.
 
 #### 2D data generation
 ```bash
-	python Script_SN2N_datagen_2D.py --img_path "Users own path/data/raw_data" --P2Pmode "1" --P2Pup "1" --BAmode "1" --SWsize "64"        
+python Script_SN2N_datagen_2D.py --img_path "Users own path/data/raw_data" --P2Pmode "1" --P2Pup "1" --BAmode "1" --SWsize "64"        
 ```
 
 #### 3D data generation
 ```bash
- 	python Script_SN2N_datagen_3D.py --img_path "CUsers own path/data/raw_data" --P2Pmode "1" --P2Pup "1" --BAmode "1" --SWsize "64"    
+python Script_SN2N_datagen_3D.py --img_path "Users own path/data/raw_data" --P2Pmode "1" --P2Pup "1" --BAmode "1" --SWsize "64"    
 ```
 
 #### Parameters instructions
@@ -203,13 +203,13 @@ Users can run the script after customizing parameters in Script_SN2N_trainer_2D.
 #### 2D data training
 
 ```bash
-    python Script_SN2N_trainer_2D.py --img_path "Users own path/data/raw_data" --sn2n_loss "1" --bs "32" --lr "2e-4" --epochs "100"
+python Script_SN2N_trainer_2D.py --img_path "Users own path/data/raw_data" --sn2n_loss "1" --bs "32" --lr "2e-4" --epochs "100"
 ```
 
 #### 3D data training
 
 ```bash
-    python Script_SN2N_trainer_3D.py --img_path "Users own path/data/raw_data" --sn2n_loss "1" --bs "4" --lr "2e-4" --epochs "100" 
+python Script_SN2N_trainer_3D.py --img_path "Users own path/data/raw_data" --sn2n_loss "1" --bs "4" --lr "2e-4" --epochs "100" 
 ```
 
 #### Parameters instructions
@@ -251,14 +251,14 @@ Users can run the script after customizing parameters in Script_SN2N_inference_2
 #### 2D inference
 
   ```bash
-	python Script_SN2N_inference_2D.py --img_path "Users own path/data/raw_data"
+python Script_SN2N_inference_2D.py --img_path "Users own path/data/raw_data"
   ```
 
 #### 3D inference
 In 3D prediction tasks, we use the method of stitching predictions to avoid issues of memory overflow
 
   ```bash
-    python Script_SN2N_inference_3D.py --img_path "Users own path/data/raw_data"
+  python Script_SN2N_inference_3D.py --img_path "Users own path/data/raw_data"
   ```
 
 #### Parameters instructions
