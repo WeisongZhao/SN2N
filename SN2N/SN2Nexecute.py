@@ -18,7 +18,7 @@ def SN2Nexecute_2D(args):
     
 def SN2Nexecute_3D(args):
     d = generator3D(img_path=args.img_path, P2Pmode = args.P2Pmode, P2Pup = args.P2Pup, BAmode = args.BAmode, SWsize = args.SWsize,
-                    SWfilter= args.SWfilter, P2Ppatch = args.P2Ppatch, img_patch = args.img_patch, ifx2 = args.ifx2, inter_mode = args.inter_mode)
+                    SWfilter= args.SWfilter, P2Ppatch = args.P2Ppatch, vol_patch = args.vol_patch, ifx2 = args.ifx2, inter_mode = args.inter_mode)
     d.execute()
     
     sn2nunet = net3D(img_path = args.img_path, sn2n_loss = args.sn2n_loss, bs = args.bs, lr = args.lr, epochs = args.epochs,

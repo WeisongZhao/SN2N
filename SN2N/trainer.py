@@ -205,7 +205,7 @@ class net2D():
     
 class net3D():
     def __init__(self, img_path,  sn2n_loss = 1, bs = 4, lr = 2e-4, epochs = 100, 
-                 vol_patch = '16,128,128', ifadaptive_lr = True):
+                 vol_patch = '16,128,128', if_alr = True):
         """
         Self-inspired Noise2Noise
         -----Parameters------
