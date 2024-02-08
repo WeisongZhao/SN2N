@@ -298,7 +298,7 @@ class net3D():
                 self.optimizer.step()            
                 i = i + 1
                  
-            if self.ifadaptive_lr:                                                 
+            if self.if_alr:                                                 
                 self.scheduler.step(total_loss)
             lr = self.optimizer.state_dict()['param_groups'][0]['lr']
             lr_m = np.array(lr)
