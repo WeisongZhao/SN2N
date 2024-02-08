@@ -75,7 +75,7 @@ Our SN2N is fully competitive with the supervised learning methods and overcomes
     $ conda create -n SN2N python=3.7.6
     $ conda activate SN2N
     
-    $ pip install -r requirement.txt
+    $ pip install -r requirements.txt
     ```
     
 ## 🚩 Execute
