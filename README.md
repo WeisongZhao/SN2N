@@ -313,7 +313,7 @@ The key parameters for 2D  execute and 3D execution are nearly consistent execep
 
 ## &#x1F308; Resources: 
 
-- **Some fancy results and comparisons:** [Lab's website](https://weisongzhao.github.io/MyWeb2/portfolio-4-col.html)
+- **Some fancy results and comparisons:** [Lab's website](https://weisongzhao.github.io/home/portfolio-4-col.html#SN2N)
 - **Preprint:** [Liying Qu et al. Self-inspired learning to denoise for live-cell super-resolution microscopy, bioRxiv (2024).](https://doi.org/10.1101/2024.01.23.576521)
 
 
