@@ -6,7 +6,7 @@ import tifffile
 import numpy as np
 import itertools
 import tqdm
-from SN2N.utils import normalize, normalize_tanh, TOTENSOR_
+from SN2N.utils import *
 
 class Predictor2D(): 
     def __init__(self, img_path, model_path, infer_mode):
