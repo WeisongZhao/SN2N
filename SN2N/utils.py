@@ -15,13 +15,6 @@ def normalize(stack):
     stack = stack / np.max(stack)
     return stack
 
-def normalize_tanh(input):
-    img = np.array(input).astype('float32')
-    img = img * 2 + 1
-    img = img - np.min(img)
-    img = img / np.max(img)
-    return img
-
 def TOTENSOR_(img_datas_np):
     if len(img_datas_np.shape) == 2:
        img_datas_np = np.expand_dims(img_datas_np, axis = 0)

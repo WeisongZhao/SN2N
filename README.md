@@ -36,7 +36,7 @@ This repository is for our developed self-inspired Noise2Noise (SN2N) learning-t
 
 <div align="center">
 
-✨ [**Introduction**](#-Introduction) **|**  🔧 [**Installation**](#-Installation)  **|** 🚀 [**Overall**](#-Paper)**|** 🚩 [**Execution**](#-Paper) **|**  🎨 [**Dataset**](#-Dataset) **|**  💻 [**Training**](#-Training) **|** ⚡ [**Inference**](#-Inference) **|** &#x1F308; [**Resources**](#-Resources)
+✨ [**Introduction**](#-Introduction) **|**  🔧 [**Installation**](#-Installation)  **|** 🚀 [**Overall**](#-Overall)**|** 🎨 [**Dataset**](#-Dataset) **|**  💻 [**Training**](#-Training) **|** ⚡ [**Inference**](#-Inference) **|** 🚩 [**Execution**](#-Execution) **|**&#x1F308; [**Resources**](#-Resources)
 
 </div>
 
@@ -83,8 +83,55 @@ Our SN2N is fully competitive with the supervised learning methods and overcomes
 
 We have <span style="color:red">two execution modes</span> for SN2N: The first one is step by step, which involves (**dataset generation, training, and then inference.**)  The second one is directly invoking (**SN2Nexecute.**)
 
+We have provided <span style="color:red">two examples</span> of denoising in 2D and 3D, along with the datasets used for training and validation of SN2N. The 2D dataset consists of synthenic microtubules, represented by 2048 x 2048 pixels with a 32.5 nm pixel size. A photon count of 50 a.u. (Level 2) was assigned to the synthetic structures for intensity emissions. Subsequently, Poisson noise injection was applied, followed by the addition of Gaussian readout noise with a fixed amplitude of 25 a.u. **The 2D dataset can be found at 'examples/denoising2D' path.** The 3D dataset consists of OMM network imaging of live COS-7 cells labeled with Tom20-mCherry on SD-SIM sysytem. **The 3D dataset** has a size of 101 * 1478 * 1137 pixels, with a pixel size of 38.23 nm, and  **is avaliable onGoogle drive at** [https://drive.google.com/drive/folders/1TI69_SkWC8Ghs6p-6uW9kKI43oMVwV-F]
+
 
 ## 🎨 Dataset
+### 0. Percentile normalization for data under ultralow SNR (optional)
+
+For the <span style="color:red">ultralow SNR data with ultrahigh baseline signal and a number of hot pixels</span>, we adapted the routinely used percentile normalization before the data generation step to remove the smooth background or hot pixels. 
+
+There are <span style="color:red">two ways to execute percentile normalization</span>.  One option is to utilize the **percentile normalization Fiji plugin, available for easy access: ** https://github.com/WeisongZhao/percentile_normalization.imagej. Users can directly remove the ultra-strong baseline signal before training using this ready-to-use plugin. Alternatively, users can employ the following **Python scripts** for percentile normalization.
+
+```bash
+---------import package--------
+import os
+import tifffile
+import numpy as np
+from SN2N.utils import *
+
+---------parameter------------
+## pmin and pmax represent mapping the data range to a specified percentage range.
+## In the most applications, the pmin and pmax were assigned as 0% and 99.999%.
+## For ultralow SNR data, we set pmin and pmax as 20% and 99.9%, respectively.
+
+pmin = 30
+pmax = 99.8
+imgpath = 'raw.tif'
+save_path = 'raw_per.tif'
+
+image_data = tifffile.imread(imgpath)
+
+## 3D percentile normalization
+try:
+    [t, x, y] = image_data.shape
+    for tt in range(t):
+        image_data_single = image_data[tt, :, :] 
+        image_data_single = np.squeeze(image_data_single)
+        image_data_single1 = normalize_percentage(x = image_data_single, pmin = pmin, pmax = pmax, axis=None, clip=True, eps=1e-20, dtype=np.float32)
+        image_data_single2 = 255*image_data_single1
+        imsave(save_path, image_data_single2.astype('uint8'))
+        
+## 2D percentile normalization        
+except ValueError:
+        image_data = tifffile.imread(imgpath)
+        image_data = normalize_percentage(x = image_data, pmin = pmin, pmax = pmax, axis=None, clip=True, eps=1e-20, dtype=np.float32)
+        image_data = 255*image_data
+        imsave(save_path, image_data)        
+    
+print("Data preprocessing is completed.")
+```
+
 
 ### 1. Self-supervised data generation
 Our SN2N is adaptable to both 2D (**xy**) and 3D (**xyz**) datasets. You can use your own data or our uploaded to generate 2D / 3D SN2N data pairs. 
@@ -315,6 +362,7 @@ The key parameters for 2D  execute and 3D execution are nearly consistent execep
 
 - **Some fancy results and comparisons:** [Lab's website](https://weisongzhao.github.io/home/portfolio-4-col.html#SN2N)
 - **Preprint:** [Liying Qu et al. Self-inspired learning to denoise for live-cell super-resolution microscopy, bioRxiv (2024).](https://doi.org/10.1101/2024.01.23.576521)
+- **Percentile normalization plugin: ** https://github.com/WeisongZhao/percentile_normalization.imagej
 
 
 ## Open source [SN2N](https://github.com/WeisongZhao/SN2N)
