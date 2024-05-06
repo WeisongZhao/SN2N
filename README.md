@@ -83,7 +83,7 @@ Our SN2N is fully competitive with the supervised learning methods and overcomes
 
 We have **two execution modes** for SN2N: The first one is step by step, which involves (**dataset generation, training, and then inference.**)  The second one is directly invoking (**SN2Nexecute.**)
 
-We have provided **two examples** of denoising in 2D and 3D, along with the datasets used for training and validation of SN2N. The 2D dataset consists of synthenic microtubules, represented by 2048 x 2048 pixels with a 32.5 nm pixel size. A photon count of 50 a.u. (Level 2) was assigned to the synthetic structures for intensity emissions. Subsequently, Poisson noise injection was applied, followed by the addition of Gaussian readout noise with a fixed amplitude of 25 a.u. **The 2D dataset can be found at 'examples/denoising2D/data' path.** The 3D dataset consists of OMM network imaging of live COS-7 cells labeled with Tom20-mCherry on SD-SIM sysytem. **The 3D dataset** has a size of 101 * 1478 * 1137 pixels, with a pixel size of 38.23 nm, and  **is avaliable onGoogle drive at** [https://drive.google.com/drive/folders/1TI69_SkWC8Ghs6p-6uW9kKI43oMVwV-F]
+We have provided **two examples** of denoising in 2D and 3D, along with the datasets used for training and validation of SN2N. The 2D dataset consists of synthenic microtubules, represented by 2048 x 2048 pixels with a 32.5 nm pixel size. A photon count of 50 a.u. (Level 2) was assigned to the synthetic structures for intensity emissions. Subsequently, Poisson noise injection was applied, followed by the addition of Gaussian readout noise with a fixed amplitude of 25 a.u. **The 2D dataset can be found at 'examples/denoising2D/data' path.** The 3D dataset consists of OMM network imaging of live COS-7 cells labeled with Tom20-mCherry on SD-SIM sysytem. **The 3D dataset** has a size of 101 * 1478 * 1137 pixels, with a pixel size of 38.23 nm, and  **is avaliable on Google drive at** https://drive.google.com/drive/folders/1TI69_SkWC8Ghs6p-6uW9kKI43oMVwV-F
 
 
 ## 🎨 Dataset
@@ -361,7 +361,7 @@ The key parameters for 2D  execute and 3D execution are nearly consistent execep
 
 - **Some fancy results and comparisons:** [Lab's website](https://weisongzhao.github.io/home/portfolio-4-col.html#SN2N)
 - **Preprint:** [Liying Qu et al. Self-inspired learning to denoise for live-cell super-resolution microscopy, bioRxiv (2024).](https://doi.org/10.1101/2024.01.23.576521)
-- **Percentile normalization plugin:** https://github.com/WeisongZhao/percentile_normalization.imagej
+- **Percentile normalization plugin:** https://github.com/WeisongZhao/SN2N
 
 
 ## Open source [SN2N](https://github.com/WeisongZhao/SN2N)
