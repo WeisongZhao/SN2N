@@ -352,7 +352,6 @@ The key parameters for 2D  execute and 3D execution are nearly consistent execep
 
 ## Version
 
-- v0.4.0 add introductions of percentile normalization.
 - v0.3.1 add examples for both 2D denoising and 3D denoising, and integrate them into the SN2Nexecute function.
 - v0.2.8 reorder the core code
 - v0.1.0 initial version
