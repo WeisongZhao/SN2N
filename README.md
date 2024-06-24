@@ -36,7 +36,7 @@ This repository is for our developed self-inspired Noise2Noise (SN2N) learning-t
 
 <div align="center">
 
-✨ [**Introduction**](#-Introduction) **|**  🔧 [**Installation**](#-Installation)  **|** 🚀 [**Overall**](#-Overall)**|** 🎨 [**Dataset**](#-Dataset) **|**  💻 [**Training**](#-Training) **|** ⚡ [**Inference**](#-Inference) **|** 🚩 [**Execution**](#-Execution) **|**&#x1F308; [**Resources**](#-Resources)
+✨ [**Introduction**](#-Introduction) **|**  🔧 [**Installation**](#-Installation)  **|** 🚀 [**Overall**](#-Overall)**|** 🎨 [**Dataset**](#-Dataset) **|**  💻 [**Training**](#-Training) **|** ⚡ [**Inference**](#-Inference) **|** 🚩 [**Execution**](#-Execution) **|**🏆 [**Models**](#-Models) **|**&#x1F308; [**Resources**](#-Resources)
 
 </div>
 
@@ -348,6 +348,21 @@ The key parameters for 2D  execute and 3D execution are nearly consistent execep
     ======for details, refer to SN2N.get_options.========
     
 ```
+
+## 🏆 Models
+
+We  have provided 12 generalized pre-trained models for specfic tasks and hope this will be helpful to the community.
+
+|            No.            | Data                                                         | Microscopy system | Pixel size | Network  |
+| :-----------------------: | ------------------------------------------------------------ | :---------------: | :--------: | :------: |
+|        1 (Fig. 2l)        | fixed COS-7 cells of [lysosomes](https://zenodo.org/record/12518397/files/fixed_lysosomes_model_4_11_full.pth?download=1) labeled with LAMP1-EGFP       |      SD-SIM       |  32.5 nm   | 2D U-Net |
+|        2 (Fig. 2m)        | fixed COS-7 cells of [mitochondria](https://zenodo.org/record/12518397/files/fixed_mito_model_4_8_full.pth?download=1) labeled with Tom20-mGold1  |      SD-SIM       |  32.5 nm   | 2D U-Net |
+|        3 (Fig. 4b)        | Live COS-7 cells of [mitochondria](https://zenodo.org/record/12518397/files/Live_mito_3D_model_5_26_full.pth?download=1) labeled with Tom20–mCherry  |      SD-SIM       |  38.23 nm  | 3D U-Net |
+|        4 (Fig. 4e)        | Live COS-7 cells of [mitochondria](https://zenodo.org/record/12518397/files/Live_mito_4D_model_5_31_full.pth?download=1) labeled with Tom20–mCherry  |      SD-SIM       |  38.23 nm  | 3D U-Net |
+|        5 (Fig. 4g)        | Live COS-7 cells, [mitochondria](https://zenodo.org/record/12518397/files/Live_mito_5D_model_10_31_full.pth?download=1) labeled with mGold-Mito-N-7, [ER](https://zenodo.org/record/12518397/files/Live_ER_5D_model_11_1_full.pth?download=1) labeled with DsRed-ER, and the [nucleus](https://zenodo.org/record/12518397/files/Live_nuclear_5D_model_11_1_full.pth?download=1) labeled with SPY650-DNA |      SD-SIM       |  38.23 nm  | 3D U-Net |
+|        6 (Fig. 5g)        | Live COS-7 cells, [MT](https://zenodo.org/record/12518397/files/STED_live_MT_model_12_30_full.pth?download=1) labeled with SiR-Tubulin, [Actin](https://zenodo.org/record/12518397/files/STED_live_actin_model_5_10_full.pth?download=1) labeled with Lifeact-EGFP, and the [ER](https://zenodo.org/record/12518397/files/STED_live_ER_model_12_30_full.pth?download=1) labeled with Sec61β–EGFP |       STED        |   16 nm    | 2D U-Net |
+| 7 (Extended Data Fig. 6a) | Live COS-7 cells, [ER](https://zenodo.org/record/12518397/files/Live_ER_exfig6_model_4_9_full.pth?download=1) labeled with Hoechst and the [mitochondira](https://zenodo.org/record/12518397/files/Live_mito_exfig6_model_4_10_full.pth?download=1) labeled with MitoTracker Deep Red |   EMCCD SD-SIM    |   94 nm    | 3D U-Net |
+
 
 
 ## Version
