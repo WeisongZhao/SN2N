@@ -83,7 +83,7 @@ Our SN2N is fully competitive with the supervised learning methods and overcomes
 
 We have **two execution modes** for SN2N: The first one is step by step, which involves (**dataset generation, training, and then inference.**)  The second one is directly invoking (**SN2Nexecute.**)
 
-We have provided **two examples** of denoising in 2D and 3D, along with the datasets used for training and validation of SN2N. The 2D dataset consists of synthenic microtubules, represented by 2048 x 2048 pixels with a 32.5 nm pixel size. **The 2D dataset can be found at 'examples/denoising2D/data' path.** The 3D dataset consists of outer mitochondrial membrane (OMM) network imaging of live COS-7 cells labeled with Tom20-mCherry on SD-SIM sysytem. **The 3D dataset** has a size of 101 * 1478 * 1137 pixels, with a pixel size of 38.23 nm, and  **is avaliable on Google drive at** https://drive.google.com/drive/folders/1TI69_SkWC8Ghs6p-6uW9kKI43oMVwV-F
+We have provided **two examples** of denoising in 2D and 3D, along with the datasets used for training and validation of SN2N. The 2D dataset consists of synthenic microtubules, represented by 2048 x 2048 pixels with a 32.5 nm pixel size. **The 2D dataset can be found at 'examples/denoising2D/data' path.** The 3D dataset consists of outer mitochondrial membrane (OMM) network imaging of live COS-7 cells labeled with Tom20-mCherry on SD-SIM sysytem. **The 3D dataset** has a size of 101 * 1478 * 1137 pixels, with a pixel size of 38.23 nm, and  **is avaliable  at** [https://zenodo.org/records/12697244/files/c12_SR_w1L-561_t1.tif?download=1.](https://zenodo.org/records/12697244/files/c12_SR_w1L-561_t1.tif?download=1.)
 
 
 ## 🎨 Dataset
