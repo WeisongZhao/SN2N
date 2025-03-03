@@ -1,7 +1,7 @@
 [![Github commit](https://img.shields.io/github/last-commit/WeisongZhao/SN2N)](https://github.com/WeisongZhao/SN2N/)
 [![Github All Releases](https://img.shields.io/github/downloads/WeisongZhao/SN2N/total.svg)](https://github.com/WeisongZhao/SN2N/releases/tag/v0.3.2/)
 [![License](https://img.shields.io/github/license/WeisongZhao/SN2N)](https://github.com/WeisongZhao/SN2N/blob/master/LICENSE/)
-[![paper](https://img.shields.io/badge/paper-nat.%20methods-black.svg)](https://www.nature.com/nmeth/)
+[![paper](https://img.shields.io/badge/paper-nat.%20methods-black.svg)](https://www.nature.com/articles/s41592-024-02400-9/)
 [![releases](https://img.shields.io/badge/release-v0.3.5-FF6600.svg)](https://github.com/WeisongZhao/SN2N/releases/tag/v0.3.5/)
 <br>
 
@@ -12,7 +12,7 @@
 
 
 <p>
-<h1 align="center"><font color="#FF6600">S</font>N2N</h1>
+<h1 align="center">SN<font color="#FF6600">2</font>N</h1>
 <h5 align="center">Self-inspired learning to denoise for live-cell super-resolution microscopy.</h5>
 <h6 align="right">v0.3.5</h6>
 </p>
@@ -30,7 +30,7 @@
 <br>
 
 
-This repository is for our developed self-inspired Noise2Noise (SN2N) learning-to-denoise engine, and it will be in continued development. It is distributed as accompanying software for publication: [Liying Qu et al. Self-inspired learning to denoise for live-cell super-resolution microscopy, bioRxiv (2024)](https://doi.org/10.1101/2024.01.23.576521). Please cite SN2N in your publications, if it helps your research.
+This repository is for our developed self-inspired Noise2Noise (SN2N) learning-to-denoise engine, and it will be in continued development. It is distributed as accompanying software for publication: [Liying Qu et al. Self-inspired learning for denoising live-cell super-resolution microscopy, 21, 1895–1908, Nature Methods (2024)](https://www.nature.com/articles/s41592-024-02400-9). Please cite SN2N in your publications, if it helps your research.
 
 <br><br><br>
 
@@ -376,7 +376,7 @@ We  have provided 12 generalized pre-trained models for specfic tasks and hope t
 - **Some fancy results and comparisons:** [Lab's website](https://weisongzhao.github.io/home/portfolio-4-col.html#SN2N)
 - **Preprint:** [Liying Qu et al. Self-inspired learning to denoise for live-cell super-resolution microscopy, bioRxiv (2024).](https://doi.org/10.1101/2024.01.23.576521)
 - **Percentile normalization plugin:** https://github.com/WeisongZhao/SN2N
-
+- **Publication:** [Liying Qu et al. Self-inspired learning for denoising live-cell super-resolution microscopy, 21, 1895–1908, Nature Methods (2024)](https://www.nature.com/articles/s41592-024-02400-9).
 
 ## Open source [SN2N](https://github.com/WeisongZhao/SN2N)
 This software and corresponding methods can only be used for **non-commercial** use, and they are under Open Data Commons Open Database License v1.0.
