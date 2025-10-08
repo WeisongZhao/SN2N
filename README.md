@@ -16,8 +16,7 @@
 <h5 align="center">Self-inspired learning to denoise for live-cell super-resolution microscopy.</h5>
 <h6 align="right">v0.3.5</h6>
 </p>
-
-
+**Please note: This repository is no longer actively maintained. Future development will take place at [SR-Wiki/SN2N](https://github.com/SR-Wiki/SN2N).**
 
 
 
