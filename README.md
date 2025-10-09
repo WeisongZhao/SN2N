@@ -2,7 +2,7 @@
 > [!IMPORTANT]  
 This repository is no longer actively maintained. Future development will take place at [SR-Wiki/SN2N](https://github.com/SR-Wiki/SN2N).
 
-
+<br><br>
 [![Github commit](https://img.shields.io/github/last-commit/WeisongZhao/SN2N)](https://github.com/WeisongZhao/SN2N/)
 [![License](https://img.shields.io/github/license/WeisongZhao/SN2N)](https://github.com/WeisongZhao/SN2N/blob/master/LICENSE/)
 [![paper](https://img.shields.io/badge/paper-nat.%20methods-black.svg)](https://www.nature.com/articles/s41592-024-02400-9/)
