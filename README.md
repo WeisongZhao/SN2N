@@ -1,8 +1,11 @@
+
+> [!IMPORTANT]  
+This repository is no longer actively maintained. Future development will take place at [SR-Wiki/SN2N](https://github.com/SR-Wiki/SN2N).
+
+
 [![Github commit](https://img.shields.io/github/last-commit/WeisongZhao/SN2N)](https://github.com/WeisongZhao/SN2N/)
-[![Github All Releases](https://img.shields.io/github/downloads/WeisongZhao/SN2N/total.svg)](https://github.com/WeisongZhao/SN2N/releases/tag/v0.3.2/)
 [![License](https://img.shields.io/github/license/WeisongZhao/SN2N)](https://github.com/WeisongZhao/SN2N/blob/master/LICENSE/)
 [![paper](https://img.shields.io/badge/paper-nat.%20methods-black.svg)](https://www.nature.com/articles/s41592-024-02400-9/)
-[![releases](https://img.shields.io/badge/release-v0.3.5-FF6600.svg)](https://github.com/WeisongZhao/SN2N/releases/tag/v0.3.5/)
 <br>
 
 [![Twitter](https://img.shields.io/twitter/follow/QuLiying?label=liying)](https://twitter.com/QuLiying)
@@ -16,7 +19,6 @@
 <h5 align="center">Self-inspired learning to denoise for live-cell super-resolution microscopy.</h5>
 <h6 align="right">v0.3.5</h6>
 </p>
-Please note: This repository is no longer actively maintained. Future development will take place at [SR-Wiki/SN2N](https://github.com/SR-Wiki/SN2N).
 
 
 
