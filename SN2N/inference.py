@@ -283,8 +283,15 @@ class Predictor3D():
                         
                                 for channel in range(num_output_channels):
                                     applied[...] /= sum_weight
+
                         
                                 applied = 255*normalize(applied)
+                                # 直接除以最大值进行归一化（不减去最小值）
+                                #max_val = applied.max()
+                                #if max_val > 0:  # 避免除以0
+                                #    applied = 255 * (applied / max_val)
+                                #else:
+                                #    applied = 0  # 如果所有值都是0，则保持为0
                                 result.append(applied)
                             r = result if input_is_list else result[0]
                             tifffile.imwrite('%s/%s_%s.tif'%(save_path, Ufile, model_Ufile),r.astype('uint8'))

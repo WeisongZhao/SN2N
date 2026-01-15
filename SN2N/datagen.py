@@ -85,6 +85,7 @@ class generator2D():
         self.SWfilter = SWfilter
         self.P2Ppatch = (int(P2Ppatch),) * 2
         self.img_patch = (int(img_patch),) * 2
+        self.img_patch_size = [int(img_patch), int(img_patch)]
         self.ifx2 = ifx2
         self.inter_mode = inter_mode
         
@@ -208,8 +209,9 @@ class generator2D():
         SWmode = self.SWmode
         SWfilter = self.SWfilter
         img_patch = self.img_patch
-        # make sure the image is in range of 0~255
-        # image_data = 255*normalize(image_data)
+        img_max =  np.iinfo(image_data.dtype).max
+        image_data = 255*image_data.astype(np.float32) / img_max
+        #image_data = 255*normalize(image_data)
         if SWmode == 0:
             threshold_real = SWfilter
         if SWmode == 1:
@@ -296,9 +298,11 @@ class generator2D():
         imgpart_list = []
         for tt in range(t):
             temp_l = left[tt, :, :]
-            # temp_l = normalize(temp_l)
+            temp_l = temp_l/255
+            #temp_l = normalize(temp_l)
             temp_r = right[tt, :, :]
-            # temp_r = normalize(temp_r)
+            temp_r = temp_r/255
+            #temp_r = normalize(temp_r)
             imgpart[0 : imsize[0], 0 : imsize[1]] = temp_l        
             imgpart[0 : imsize[0], imsize[1] : 2 * imsize[1]] = temp_r
             imgpart_copy = imgpart.copy()
@@ -450,7 +454,7 @@ class generator2D():
         if mode == 0:
             return imga
 
-        if imgb == []:
+        if len(imgb) == 0:
             mode = 2    
         if mode == 1: #interchange along t-axial 
             img = self.interchange_multiple(imga, imgb, ifdirect = True)
@@ -603,6 +607,7 @@ class generator3D():
         self.vol_patch = tuple(map(int, vol_patch.split(',')))
         self.ifx2 = ifx2
         self.inter_mode = inter_mode
+        self.multi_frame = self.vol_patch[0]
         
     def execute(self, flage = 1):
         """
@@ -634,12 +639,12 @@ class generator3D():
             
             image_data_stack_list = []
             [t, x, y] = image_data_stack.shape
-            for tt in range(t-multi_frame):
-                image_data = image_data_stack[tt : tt + multi_frame, :, :]
+            for tt in range(t-self.multi_frame):
+                image_data = image_data_stack[tt : tt + self.multi_frame, :, :]
                 image_data_stack_list.append(image_data)
             image_data_stack_list = np.array(image_data_stack_list)
             
-            for ttt in range(t-16):
+            for ttt in range(t-self.multi_frame):
                 img_temp = np.squeeze(image_data_stack_list[ttt, :, :, :])
                 image_arr = self.slidingWindow3d(img_temp)
                 flage = self.savedata3d(image_arr, flage)
@@ -658,12 +663,12 @@ class generator3D():
                         image_data_pre = self.random_interchange(imga = image_data_pre,
                             imgb = image_data_b)
                     image_data_stack_list_pre = []
-                    for tt in range(t-multi_frame):
-                        image_data_pre = image_data_pre[tt : tt + multi_frame, :, :]
-                        image_data_stack_list_pre.append(image_data)
+                    for tt in range(t-self.multi_frame):
+                        image_data_pre = image_data_pre[tt : tt + self.multi_frame, :, :]
+                        image_data_stack_list_pre.append(image_data_pre)
                     image_data_stack_list_pre = np.array(image_data_stack_list)
                     
-                    for ttt in range(t-16):
+                    for ttt in range(t-self.multi_frame):
                         img_temp = np.squeeze(image_data_stack_list_pre[ttt, :, :, :])
                         image_arr = self.slidingWindow3d(img_temp)
                         flage = self.savedata3d(image_arr, flage)
@@ -725,8 +730,9 @@ class generator3D():
         SWmode = self.SWmode
         SWfilter = self.SWfilter
         (t, h, w) = image_data_stack.shape
-        # make sure the image is in range of 0~255
-        # image_data_stack = 255*normalize(image_data_stack)
+        img_max =  np.iinfo(image_data_stack.dtype).max
+        image_data_stack = 255*image_data_stack.astype(np.float32) / img_max
+        #image_data_stack = 255*normalize(image_data_stack)
         if SWmode == 0:
             threshold_real = SWfilter
         if SWmode == 1:
@@ -844,16 +850,18 @@ class generator3D():
         imgpart_list = []
         for f in range(frame):
             temp_l = left_stack[f, :, :, :]
-            # temp_l = normalize(temp_l)
+            temp_l = temp_l / 255
+            #temp_l = normalize(temp_l)
             temp_r = right_stack[f, :, :, :]
-            # temp_r = normalize(temp_r)
+            temp_r = temp_r / 255
+            #temp_r = normalize(temp_r)
             imgpart[:, 0 : imsize[0], 0 : imsize[1]] = temp_l        
             imgpart[:, 0 : imsize[0], imsize[1] : 2 * imsize[1]] = temp_r
             imgpart_copy = imgpart.copy()
             imgpart_list.append(imgpart_copy)
             if self.BAmode == 1:
                 mode = random.randint(0, 7)   
-                for taxial in range(t):
+                for taxial in range(t-self.multi_frame):
                     temp_l_aug = self.basic_augment(temp_l[taxial, :, :], mode)
                     temp_r_aug = self.basic_augment(temp_r[taxial, :, :], mode)
                     imgpart_aug[taxial, 0 : imsize[0], 0 : imsize[1]] = temp_l_aug        
@@ -862,7 +870,7 @@ class generator3D():
                     imgpart_list.append(imgpart_aug_copy)
             elif self.BAmode == 2:
                 for m in range(1, 8):
-                    for taxial in range(t):
+                    for taxial in range(t-self.multi_frame):
                         temp_l_aug = self.basic_augment(temp_l[taxial, :, :], m)
                         temp_r_aug = self.basic_augment(temp_r[taxial, :, :], m)
                         imgpart_aug[taxial, 0 : imsize[0], 0 : imsize[1]] = temp_l_aug       
@@ -1000,7 +1008,7 @@ class generator3D():
         if mode == 0:
             return imga
 
-        if imgb == []:
+        if len(imgb) == 0:
             mode = 2    
         if mode == 1: #interchange along t-axial 
             img = self.interchange_multiple3d(imga, imgb, ifdirect = True)

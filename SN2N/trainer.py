@@ -142,14 +142,14 @@ class net2D():
         batch_num = int(np.floor(len(path) / self.bs))
         imsize = (self.bs, 1, self.img_patch[0], self.img_patch[1])
         for i in range(batch_num):
-            imgs_As = []
-            imgs_Bs = []
             location = np.array(np.random.randint(low = 0, high=len(path), size=(self.bs, 1), dtype = 'int'))
             for batchsize in range(self.bs):
             # location = location.tolist()
                 batch = []
                 batch_tem = path[int(location[batchsize, :])]
-                batch.append(batch_tem)                
+                batch.append(batch_tem)
+                imgs_As = []
+                imgs_Bs = []
                 for img in batch:
                     img = imread(img)
                     h, w = img.shape
@@ -295,7 +295,8 @@ class net3D():
                 historym = np.array(total_loss)
                 history.append(historym) 
                 elapsed_time = datetime.datetime.now() - start_time
-                print("[Epoch %d/%d] [Batch %d/%d] [loss:%f] time:%s" 
+                if i%100==0:
+                    print("[Epoch %d/%d] [Batch %d/%d] [loss:%f] time:%s"
                       %(epoch, self.epochs, i, batch_num, total_loss * 100, elapsed_time))
                 loss.backward()
                 self.optimizer.step()            
@@ -309,14 +310,15 @@ class net3D():
             
             raw_path = glob(self.img_path + '/*.tif')
             test_img = tifffile.imread(raw_path[0])
-            test_img_tem = test_img[0:16, 0:256, 0:256]
+            test_img_tem = test_img[0:16, 220:476, 300:556]
             
             torch.cuda.empty_cache()
             test_pred = self.test(test_img_tem)  
             test_pred = test_pred.to(torch.device("cpu"))
             test_pred = test_pred.numpy()
             for i, item in enumerate(test_pred):
-                item = normalize(item)
+                # item = normalize(item)
+                item = item/255
                 tifffile.imsave(os.path.join(self.images_path, "epoch_%d.tif" %(epoch)), item)
             
             if epoch % 10 == 0:
@@ -388,9 +390,11 @@ class net3D():
                             img_label_list_2.append(img_label_temp)
                     
                     img_data_list_2 = np.array(img_data_list_2)
-                    img_label_list_2 = np.array(img_label_list_2)    
-                    img_data_list_2 = normalize(img_data_list_2)
-                    img_label_list_2 = normalize(img_label_list_2)
+                    img_label_list_2 = np.array(img_label_list_2)
+                    img_data_list_2 = img_data_list_2/255
+                    img_label_list_2 = img_label_list_2/255
+                    #img_data_list_2 = normalize(img_data_list_2)
+                    #img_label_list_2 = normalize(img_label_list_2)
                     imgs_A[batchsize, 0, :, :, :] = img_data_list_2
                     imgs_B[batchsize, 0, :, :, :] = img_label_list_2
             yield imgs_A, imgs_B
@@ -412,7 +416,8 @@ class net3D():
         for taxial in range(t):
             img_tem = img[taxial, :, :]
             img_tem = np.squeeze(img_tem)
-            img_tem = normalize(img_tem)
+            img_tem = img_tem/255
+            # img_tem = normalize(img_tem)
             img_list.append(img_tem)
         img_list = np.array(img_tem)
         imgs_A[:, :, :, :, :] = img
